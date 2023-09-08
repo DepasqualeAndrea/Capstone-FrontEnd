@@ -1,5 +1,5 @@
 <div class="content">
- <div class="login-box">
+  <!--<div class="login-box">
   <h2>Login</h2>
   <form>
     <div class="user-box">
@@ -24,7 +24,39 @@
     <p class="text-center d-flex justify-content-center btn">Registrati Ora!</p>
 
   </form>
-</div>
-</div>
+</div>-->
+  <div class="login-box">
+    <h2>Registrazione</h2>
+    <form #form="ngForm" (ngSubmit)="registra(form)" class="text-light">
+      <div class="">
+        <label for="nome">Nome</label>
+        <input name="nome" required ngModel class="form-control" id="nome" type="text">
+        <label for="cognome">Cognome</label>
+        <input name="cognome" required ngModel class="form-control" id="cognome" type="text">
+        <label for="username">Username</label>
+        <input name="username" required ngModel class="form-control" id="username" type="text">
+    </div>
+    <div class="">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" class="form-control" required ngModel>
+    </div>
+    <div class="">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" class="form-control" required ngModel>
+    </div>
+      <button type="submit" [disabled]="form.invalid" class="btn">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        Registrati
+      </button>
+      <div class="text-light text-center">
+        <h5 class="mt-4">Oppure</h5>
+        <h5>Se non hai ancora un account</h5>
+      </div>
+      <p class="text-center d-flex justify-content-center btn">Registrati Ora!</p>
 
-
+    </form>
+  </div>
+</div>

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -7,7 +10,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
   register: boolean = false;
-  constructor() { }
+  isLoading = false;
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -17,4 +21,22 @@ export class LoginComponent implements OnInit {
   changeToSignup() {
     this.register = true;
   }
+
+  registra(form: NgForm) {
+    this.isLoading = true;
+    console.log(form.value);
+    try {
+        this.authService.signup(form.value).subscribe();
+        this.router.navigate(['/login']);
+        this.isLoading = false
+    } catch (error: any) { // Cast error to any type
+        console.error(error);
+        if (error.status == 400) {
+            alert('Email già registrata!');
+            this.router.navigate(['/register']);
+        }
+        this.isLoading = false
+    }
+}
+
 }
