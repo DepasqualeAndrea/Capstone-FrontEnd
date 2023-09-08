@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './auth/login/login.component';
 import { HomePagComponent } from './components/home-pag/home-pag.component';
+import { GuardGuard } from './auth/guard.guard';
 
 const routes: Routes = [
   {
@@ -11,8 +12,8 @@ const routes: Routes = [
      path: 'login', component: LoginComponent
 },
 {
-    path: 'home', component: HomePagComponent
-    //canActivate: [GuardGuard]
+    path: 'home', component: HomePagComponent,
+    canActivate: [GuardGuard]
 }
 ];
 

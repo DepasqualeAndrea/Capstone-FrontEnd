@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+
   }
   changeToLogin(){
     this.register = false;
@@ -37,6 +38,21 @@ export class LoginComponent implements OnInit {
         }
         this.isLoading = false
     }
+}
+
+accedi(form: NgForm) {
+  this.isLoading = true;
+  console.log(form.value);
+  try {
+      this.authService.login(form.value).subscribe();
+      this.isLoading = false;
+      alert('Login effettuato!');
+      this.router.navigate(['/home']);
+  } catch (error) {
+      this.isLoading = false;
+      alert('Login sbagliato!');
+      console.error(error);
+  }
 }
 
 }
