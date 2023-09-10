@@ -1,1 +1,125 @@
-<p>home-pag works!</p>
+<app-modal *ngIf="modal.showModal"
+  (closeModalEvent)="closeModal()"></app-modal> <!--[selectedMovieId]="selectedPostId"-->
+<!--(click)="openModal(post.id)"-->
+
+<nav class="main-menu">
+  <ul>
+    <li>
+      <a href="https://jbfarrow.com">
+        <i class="fa fa-home fa-2x"></i>
+        <span class="nav-text">
+          Community Dashboard
+        </span>
+      </a>
+
+    </li>
+    <li class="has-subnav">
+      <a href="#">
+        <i class="fa fa-globe fa-2x"></i>
+        <span class="nav-text">
+          Global Surveyors
+        </span>
+      </a>
+
+    </li>
+    <li class="has-subnav">
+      <a href="#">
+        <i class="fa fa-comments fa-2x"></i>
+        <span class="nav-text">
+          Group Hub Forums
+        </span>
+      </a>
+
+    </li>
+    <li class="has-subnav">
+      <a href="#">
+        <i class="fa fa-camera-retro fa-2x"></i>
+        <span class="nav-text">
+          Survey Photos
+        </span>
+      </a>
+
+    </li>
+    <li>
+      <a href="#">
+        <i class="fa fa-film fa-2x"></i>
+        <span class="nav-text">
+          Surveying Tutorials
+        </span>
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        <i class="fa fa-book fa-2x"></i>
+        <span class="nav-text">
+          Surveying Jobs
+        </span>
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        <i class="fa fa-cogs fa-2x"></i>
+        <span class="nav-text">
+          Tools & Resources
+        </span>
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        <i class="fa fa-map-marker fa-2x"></i>
+        <span class="nav-text">
+          Member Map
+        </span>
+      </a>
+    </li>
+    <li>
+      <a href="#">
+        <i class="fa fa-info fa-2x"></i>
+        <span class="nav-text">
+          Documentation
+        </span>
+      </a>
+    </li>
+  </ul>
+
+  <ul class="logout">
+    <li>
+      <a href="#">
+        <i class="fa fa-power-off fa-2x"></i>
+        <span class="nav-text">
+          Logout
+        </span>
+      </a>
+    </li>
+  </ul>
+</nav>
+<div class="area container-fluid d-flex flex-column justify-content-center">
+  <form class="d-flex justify-content-center" role="search">
+    <input class="form-control me-2 w-50" type="search" placeholder="Search" aria-label="Search">
+  </form>
+  <div class="social-card mt-4" >
+    <div class="social-card-header mb-5">
+      <img src="https://plus.unsplash.com/premium_photo-1675034823520-01a8784605ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyOXx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=60" class="social-card-user-image"/>
+      <a class="social-card-user-name" href="https://www.social.com/followmeto/">Andrea De Pasquale</a>
+      <div class="social-card-time">58 min</div>
+    </div>
+
+    <div class="social-card-image">
+      <img src="https://images.unsplash.com/photo-1693930270229-694fc4216a69?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMTh8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=600&q=60"/>
+    </div>
+
+    <div class="social-card-content">
+      <p class="likes text-light"><strong>18.068 Like</strong> </p>
+      <p class="text-light"><a class="social-card-content-user" href="https://www.social.com/followmeto/">Andrea De Pasquale</a> So excited to have made it to Lapland! Our first stop was sleeping inside a room made entirely of ice at the Kemi Snow Hotel 😱 Stoked that I've ticked this off my bucket list and never have to do it again... Let's just say the novelty of sleeping in -5 degrees temperature quickly wears off (but hey, it was a COOL experience nonetheless) 😜❄️ <a class="hashtag" href="https://www.social.com/explore/tags/visitkemi/">#visitkemi</a></p>
+      <p class="comments"> <strong>Vedi tutti i 48 Commenti</strong> </p>
+    </div>
+
+    <div class="social-card-footer">
+      <a class="footer-action-icons" ><i class="fa fa-heart-o"></i></a>
+      <input class="comments-input" type="text" placeholder="Scrivi qui il tuo commento"/>
+      <a class="footer-action-icons" ><i class="fa fa-ellipsis-h"></i></a>
+    </div>
+
+  </div>
+</div>
+

@@ -29,6 +29,8 @@ export class LoginComponent implements OnInit {
     try {
         this.authService.signup(form.value).subscribe();
         this.router.navigate(['/login']);
+        alert('Registrazione effettuata con successo, ora puoi effettuare il Login ');
+        this.register = false;
         this.isLoading = false
     } catch (error: any) { // Cast error to any type
         console.error(error);

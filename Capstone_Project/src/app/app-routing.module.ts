@@ -13,7 +13,7 @@ const routes: Routes = [
 },
 {
     path: 'home', component: HomePagComponent,
-    canActivate: [GuardGuard]
+    //canActivate: [GuardGuard]
 }
 ];
 

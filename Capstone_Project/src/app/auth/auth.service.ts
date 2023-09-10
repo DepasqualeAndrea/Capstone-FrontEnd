@@ -51,6 +51,7 @@ export class AuthService {
   signup(data: {
       nome: string;
       cognome: string;
+      username: string;
       email: string;
       password: string;
   }) {
