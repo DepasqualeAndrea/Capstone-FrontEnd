@@ -14,11 +14,23 @@ export class AuthService {
   baseURL = environment.baseUrl;
   private authSubj = new BehaviorSubject<null | Data>(null); // Serve per comunicare in tempo reale all'applicazione la presenza dell'utente autenticato
   utente!: Data;
-
+  private token: string | null = null;
   user$ = this.authSubj.asObservable(); // La variabile di tipo BehaviourSubject che trasmetterà la presenza o meno dell'utente
   timeoutLogout: any;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, ) {}
+
+  setToken(token: string) {
+    this.token = token;
+  }
+
+  getToken() {
+    return this.token;
+  }
+
+  isLoggedIn() {
+    return !!this.token;
+  }
 
   login(data: { email: string; password: string }) {
       return this.http.post<Data>(`${this.baseURL}auth/login`, data).pipe(
@@ -27,6 +39,7 @@ export class AuthService {
               this.authSubj.next(data);
               this.utente = data;
               console.log(this.utente);
+              this.setToken(data.token);
               localStorage.setItem('user', JSON.stringify(data));
           }),
           catchError(this.errors)
@@ -79,6 +92,9 @@ export class AuthService {
       }, expirationMilliseconds);
   }
 */
+
+
+
   private errors(err: any) {
       switch (err.error) {
           case 'Email already exists':

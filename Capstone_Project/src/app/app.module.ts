@@ -6,10 +6,11 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './auth/login/login.component';
 import { HomePagComponent } from './components/home-pag/home-pag.component';
 import { NavComponent } from './components/nav/nav.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ModalComponent } from './components/modal/modal.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { TokenInterceptor } from './auth/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,13 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

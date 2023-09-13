@@ -14,7 +14,7 @@ export class TokenInterceptor implements HttpInterceptor {
 
   newReq! : HttpRequest<any>;
 
-  intercept(
+  /*intercept(
       request: HttpRequest<unknown>,
       next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
@@ -34,5 +34,17 @@ export class TokenInterceptor implements HttpInterceptor {
           console.log(this.newReq);
           return next.handle(this.newReq);
       }));
+  }*/
+
+  intercept(req: HttpRequest<any>, next: HttpHandler) {
+    const token = this.authSrv.getToken();
+    if (token) {
+      const authReq = req.clone({
+        setHeaders: { Authorization: `Bearer ${token}` },
+      });
+      return next.handle(authReq);
+    } else {
+      return next.handle(req);
+    }
   }
 }
