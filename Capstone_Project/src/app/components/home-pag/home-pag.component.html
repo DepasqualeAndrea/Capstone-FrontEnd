@@ -1,78 +1,10 @@
 <app-modal *ngIf="modal.showModal" (closeModalEvent)="closeModal()"></app-modal>
+<app-nav></app-nav>
 <!--[selectedMovieId]="selectedPostId"-->
 <!--(click)="openModal(post.id)"-->
 
-<nav class="main-menu position-fixed">
-  <ul>
-    <li>
-      <i class="logo"><img src="../../../assets/media/universe.png" alt=""></i>
-    </li>
-    <li>
-      <a>
-        <i class="bi bi-house-heart"></i>
-        <span class="nav-text">
-          Home
-        </span>
-      </a>
 
-    </li>
-    <li class="has-subnav">
-      <a>
-        <i class="bi bi-search"></i>
-        <span class="nav-text">
-          Search
-        </span>
-      </a>
-
-    </li>
-    <li class="has-subnav">
-      <a>
-        <i class="bi bi-envelope-at"></i>
-        <span class="nav-text">
-          Message
-        </span>
-      </a>
-
-    </li>
-    <li class="has-subnav">
-      <a>
-        <i class="bi bi-person-fill-check"></i>
-        <span class="nav-text">
-          My profile
-        </span>
-      </a>
-
-    </li>
-    <li>
-      <a>
-        <i class="bi bi-heart"></i>
-        <span class="nav-text">
-          Notification
-        </span>
-      </a>
-    </li>
-    <li>
-      <a>
-        <i class="bi bi-plus-square"></i>
-        <span class="nav-text">
-          Create
-        </span>
-      </a>
-    </li>
-  </ul>
-
-  <ul class="logout">
-    <li>
-      <a>
-        <i class="bi bi-power"></i>
-        <span class="nav-text">
-          Logout
-        </span>
-      </a>
-    </li>
-  </ul>
-</nav>
-<div class="area container-fluid d-flex flex-column justify-content-center mt-3">
+<div class="feed container-fluid d-flex flex-column justify-content-center mt-3">
   <div class="feed-home-page">
     <form class="d-flex justify-content-center text-light" role="search">
       <input class="form-control me-2 w-25 inpt" type="search" placeholder="Search text-light" aria-label="Search">

@@ -49,6 +49,7 @@ export class AuthService {
   }
 */
   signup(data: {
+      image: File;
       nome: string;
       cognome: string;
       username: string;

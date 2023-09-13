@@ -1,0 +1,178 @@
+//text effect
+.btn {
+  padding: 0.4em;
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 15px;
+  color: #f6fff6;
+  letter-spacing: 0.3em;
+  text-shadow: -2px 2px 5px #fff;
+  background-color: transparent;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0px 1px #fff,
+    0 0 10px 2px #fff,
+    inset 0 0 0px 1px #fff,
+    inset 0 0 10px 2px #fff;
+  transition: 100ms;
+}
+
+.btn:hover {
+  box-shadow: 0 0 0px 1px #fff,
+    0 0 10px 2px #fff,
+    inset 0 0 0px 1px #fff,
+    inset 0 0 30px 2px #fff;
+  text-shadow: 0 0 10px #fff;
+  transform: translateY(-5px);
+}
+
+.btn:active {
+  box-shadow: 0 0 0px 1px #fff,
+    0 0 25px 2px #fff,
+    inset 0 0 0px 1px #fff,
+    inset 0 0 30px 2px #fff;
+  transform: translateY(1px);
+}
+.contenuti-profili div>p{
+  font-size: 2em;
+}
+.contenuti-profili div>hr{
+  margin-top: 0;
+  border-bottom: 3px solid #fff;
+}
+//testo header follower post e
+//profile HEADER
+.profile-card{
+  background: #1b1e25;
+  border: 1px solid #fff;
+  border: hidden;
+  border-radius: 3px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.profile-card-header{
+  padding: 40px;
+  height: 40px;
+}
+
+.profile-card-user-name {
+  margin-left: 20px;
+  font-weight: bold;
+  font-size: 3em;
+  width: 100%;
+  color: #fff;
+}
+
+.profile-card-user-image {
+  border-radius: 50%;
+  border: 4px solid aquamarine;
+  width: 80px;
+  height: 80px;
+  vertical-align: middle;
+}
+//profile header follower post
+
+
+a {
+  text-decoration: none;
+}
+
+.social-card {
+  background: #1b1e25;
+  border: 1px solid #f2f2f2;
+  border: hidden;
+  border-radius: 3px;
+  width: 100%;
+  max-width: 300px;
+  margin: auto;
+}
+
+.social-card-image {
+  height: 300px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.social-card-header {
+  padding: 20px;
+  height: 40px;
+}
+
+.social-card-user-image {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  vertical-align: middle;
+  border: 2px solid aquamarine;
+}
+
+.social-card-time {
+  float: right;
+  width: 80px;
+  padding-top: 10px;
+  text-align: right;
+  color: #fff;
+}
+
+hr {
+  border: none;
+  border-bottom: 1px solid #fff;
+  margin-top: 30px;
+  margin-bottom: 40px;
+
+}
+
+//sezione friend list
+
+.friends-menu {
+  background: #2e385288;
+  border-left: 1px solid #e5e5e557;
+  color: white;
+  border-left-width: 50% !important;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  height: 100%;
+  right: 0;
+  width: 300px;
+  overflow: hidden;
+  -webkit-transition: width .05s linear;
+  transition: width .05s linear;
+  -webkit-transform: translateZ(0) scale(1, 1);
+  transform: translateZ(0) scale(1, 1);
+}
+
+.friends-menu>ul {
+  margin: 5px 0;
+}
+
+.friends-menu li {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+.no-touch .scrollable.hover {
+  overflow-y: hidden;
+}
+
+.no-touch .scrollable.hover:hover {
+  overflow-y: auto;
+  overflow: visible;
+}
+
+div ul,
+div li {
+  outline: 0;
+  margin: 0 4px;
+  padding: 0;
+}
+
+.bi-dot {
+  color: green;
+  font-size: 2.5em;
+}

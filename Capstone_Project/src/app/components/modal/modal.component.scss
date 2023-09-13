@@ -4,12 +4,12 @@
   right: 0px;
   width: 100%;
   height: 100vh;
-  background-color: rgba(227, 18, 18, 0);
-  z-index: 0;
+  background-color: rgba(0, 0, 0, 0.925);
+  z-index: 12;
 }
 
 #container {
-  z-index: 0;
+  z-index: 13;
   position: fixed;
   margin: auto;
   top: 15%;

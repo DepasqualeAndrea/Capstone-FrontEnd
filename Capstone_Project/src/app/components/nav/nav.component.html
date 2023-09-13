@@ -1,17 +1,72 @@
-<nav class="navbar">
-  <div class="container-fluid d-flex align-items-center">
-    <div>
-      <a class="navbar-brand">
-        <img src="../../../assets/media/universe.png" alt="" class="logo">
+<nav class="main-menu position-fixed">
+  <ul>
+    <li routerLinkActive [routerLink]="['/home']">
+      <i class="logo"><img src="../../../assets/media/universe.png" alt=""></i>
+    </li>
+    <li routerLinkActive [routerLink]="['/home']">
+      <a>
+        <i class="bi bi-house-heart"></i>
+        <span class="nav-text">
+          Home
+        </span>
       </a>
-    </div>
-    <div>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-      </form>
-    </div>
-    <div>
-      <button class="btn btn-success">logout</button>
-    </div>
-  </div>
+
+    </li>
+    <li class="has-subnav">
+      <a>
+        <i class="bi bi-search"></i>
+        <span class="nav-text">
+          Search
+        </span>
+      </a>
+
+    </li>
+    <li class="has-subnav">
+      <a>
+        <i class="bi bi-envelope-at"></i>
+        <span class="nav-text">
+          Message
+        </span>
+      </a>
+
+    </li>
+    <li>
+      <a>
+        <i class="bi bi-heart"></i>
+        <span class="nav-text">
+          Notification
+        </span>
+      </a>
+    </li>
+    <li>
+      <a>
+        <i class="bi bi-plus-square"></i>
+        <span class="nav-text">
+          Create
+        </span>
+      </a>
+    </li>
+    <li class="has-subnav" routerLinkActive [routerLink]="['/user']" >
+      <a>
+       <i class="bi"><img
+              src="https://plus.unsplash.com/premium_photo-1675034823520-01a8784605ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyOXx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=60"
+              class="social-card-user-image" /></i>
+        <span class="nav-text">
+          Andrea
+        </span>
+
+      </a>
+    </li>
+  </ul>
+
+  <ul class="logout">
+    <li>
+      <a>
+        <i class="bi bi-power"></i>
+        <span class="nav-text">
+          Logout
+        </span>
+      </a>
+    </li>
+  </ul>
 </nav>
