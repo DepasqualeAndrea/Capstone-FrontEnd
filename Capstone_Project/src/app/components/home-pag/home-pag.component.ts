@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/auth/auth.service';
 import { Data } from 'src/app/auth/data.interface';
 import { CrudService } from 'src/app/service/crud.service';
 import { ModalService } from 'src/app/service/modal.service';
@@ -50,20 +51,35 @@ export class HomePagComponent implements OnInit {
     }
   }*/
 
+  currentUser!: {
+    userId: String,
+    nome: String,
+    cognome: String,
+    username: String,
+    email: String,
+    role: String,
+    imageData:{} ,
+    post:{},
+    comment:{} ,
+    like: {},
+  }
 
 
-  sub!: Subscription;
-users: Data[] = [];
+  users: any;
 
-  constructor(private http: CrudService, public modale: ModalService) { }
+
+  constructor(private http: CrudService, public modale: ModalService, private authService: AuthService) { }
 
    // Definisci una variabile per memorizzare i dati degli utenti
 
   ngOnInit(): void {
-    this.sub! = this.http.getUser().subscribe(data =>{
-      this.users = data
-    })
 
+    this.authService.getCurrentUserInfo().subscribe(userInfo => {
+      this.currentUser = userInfo;
+      console.log(this.currentUser);
+    });
   }
+
+
 
 }

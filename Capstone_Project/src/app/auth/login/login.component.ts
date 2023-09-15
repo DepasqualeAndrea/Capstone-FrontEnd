@@ -69,6 +69,23 @@ registra(form: NgForm): void {
   );
 }
 
+/*accedi(): void {
+  this.authService.login(this.email, this.password).subscribe(
+    (response) => {
+      // Login effettuato con successo
+      const token = this.authService.getToken();
+      console.log('Token:', token); // Verifica il token nella console
+
+      this.router.navigate(['/home']);
+      console.log('Login effettuato:', response);
+    },
+    (error) => {
+
+      console.error('Errore di login:', error);
+    }
+  );
+}
+*/
 accedi(form: NgForm) {
   this.isLoading = true;
   console.log(form.value);

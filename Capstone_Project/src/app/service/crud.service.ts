@@ -9,21 +9,10 @@ import { Observable, map } from 'rxjs';
 })
 export class CrudService {
 
-  private baseUrl ='http://localhost:3001/user';
-  user: any;
+  private baseUrl ='http://localhost:3001/utente';
+
 
   constructor(private http: HttpClient) { }
 
-  getUser():Observable<Data[]> {
-    const params = new HttpParams();
-    const headers = new HttpHeaders({
-      Authorization: `Bearer ${localStorage.getItem('token: ')}`
-    });
 
-    return this.http.get<any>(this.baseUrl, {params, headers})
-    .pipe(map(response => response.content));
-  }
- /* getUser(){
-    return this.http.get<any>(this.baseUrl);
-  }*/
 }

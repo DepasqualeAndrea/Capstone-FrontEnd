@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from 'src/environments/environment';
 import { Data } from './data.interface';
-import { BehaviorSubject, catchError, tap, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, tap, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
@@ -32,6 +32,10 @@ export class AuthService {
     return !!this.token;
   }
 
+  getCurrentUserInfo(): Observable<any> {
+    return this.http.get<any[]>('http://localhost:3001/user/utente');
+  }
+
   login(data: { email: string; password: string }) {
       return this.http.post<Data>(`${this.baseURL}auth/login`, data).pipe(
           tap((data) => {
@@ -39,7 +43,6 @@ export class AuthService {
               this.authSubj.next(data);
               this.utente = data;
               console.log(this.utente);
-              this.setToken(data.token);
               localStorage.setItem('user', JSON.stringify(data));
           }),
           catchError(this.errors)
