@@ -10,7 +10,6 @@
           Home
         </span>
       </a>
-
     </li>
     <li class="has-subnav">
       <a>
@@ -48,25 +47,28 @@
     </li>
     <li class="has-subnav" routerLinkActive [routerLink]="['/user']" >
       <a>
-       <i class="bi"><img
-              src="https://plus.unsplash.com/premium_photo-1675034823520-01a8784605ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyOXx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=60"
+       <i class="bi"><img #image
+         alt="alt"
               class="social-card-user-image" /></i>
-        <span class="nav-text">
-          Ciao Andrea!
+        <span class="nav-text" *ngIf="currentUser">
+          Ciao {{currentUser.username}}!
         </span>
 
       </a>
     </li>
   </ul>
-
+  <div *ngIf="currentUser">
+     <img [src]="imageUrl" alt="">
+  </div>
   <ul class="logout">
     <li>
       <a>
         <i class="bi bi-power"></i>
-        <button class="nav-text btn" (click)="logout()">
+        <span class="nav-text btn" (click)="logout()">
           Logout
-        </button>
+        </span>
       </a>
     </li>
   </ul>
 </nav>
+

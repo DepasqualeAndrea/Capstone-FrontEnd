@@ -65,19 +65,15 @@ export class HomePagComponent implements OnInit {
   }
 
 
-  users: any;
+
 
 
   constructor(private http: CrudService, public modale: ModalService, private authService: AuthService) { }
 
-   // Definisci una variabile per memorizzare i dati degli utenti
+
 
   ngOnInit(): void {
 
-    this.authService.getCurrentUserInfo().subscribe(userInfo => {
-      this.currentUser = userInfo;
-      console.log(this.currentUser);
-    });
   }
 
 
