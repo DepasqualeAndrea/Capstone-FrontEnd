@@ -69,7 +69,7 @@ registra(form: NgForm): void {
   );
 }
 
-/*accedi(): void {
+Accedi(): void {
   this.authService.login(this.email, this.password).subscribe(
     (response) => {
       // Login effettuato con successo
@@ -84,21 +84,6 @@ registra(form: NgForm): void {
       console.error('Errore di login:', error);
     }
   );
-}
-*/
-accedi(form: NgForm) {
-  this.isLoading = true;
-  console.log(form.value);
-  try {
-    this.authService.login(form.value).subscribe();
-    this.isLoading = false;
-    alert('Login effettuato!');
-    this.router.navigate(['/home']);
-  } catch (error) {
-    this.isLoading = false;
-    alert('Login sbagliato!');
-    console.error(error);
-  }
 }
 
 }

@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from 'src/environments/environment';
 import { Data } from './data.interface';
-import { BehaviorSubject, Observable, catchError, tap, throwError } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable, catchError, map, tap, throwError } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -13,7 +13,7 @@ export class AuthService {
   jwtHelper = new JwtHelperService(); // Serve per leggere e validare il token
   baseURL = environment.baseUrl;
   private authSubj = new BehaviorSubject<null | Data>(null); // Serve per comunicare in tempo reale all'applicazione la presenza dell'utente autenticato
-  utente!: Data;
+  utente!: any;
   private token: string | null = null;
   user$ = this.authSubj.asObservable(); // La variabile di tipo BehaviourSubject che trasmetterà la presenza o meno dell'utente
   timeoutLogout: any;
@@ -24,29 +24,27 @@ export class AuthService {
     this.token = token;
   }
 
-  getToken() {
-    return this.token;
+  getToken(): string | null {
+    return localStorage.getItem('token');
   }
 
   isLoggedIn() {
     return !!this.token;
   }
 
-  getCurrentUserInfo(): Observable<any> {
-    return this.http.get<any[]>('http://localhost:3001/user/utente');
-  }
 
-  login(data: { email: string; password: string }) {
-      return this.http.post<Data>(`${this.baseURL}auth/login`, data).pipe(
-          tap((data) => {
-              console.log(data);
-              this.authSubj.next(data);
-              this.utente = data;
-              console.log(this.utente);
-              localStorage.setItem('user', JSON.stringify(data));
-          }),
-          catchError(this.errors)
-      );
+
+  login(email: string, password: string): Observable<any> {
+    const credentials = { email, password };
+    return this.http.post<any>('http://localhost:3001/auth/login', credentials)
+      .pipe(map(response => {
+        console.log('Server Response:', response);
+        if (response.token) {
+          console.log('Token:', response.token);
+          localStorage.setItem('token', response.token);
+        }
+        return response;
+      }));
   }
 /*
   restore() {
@@ -97,6 +95,9 @@ export class AuthService {
 */
 
 
+  getCurrentUserInfo(): Observable<any> {
+    return this.http.get<any[]>('http://localhost:3001/user/utente');
+  }
 
   private errors(err: any) {
       switch (err.error) {
