@@ -47,8 +47,8 @@
     </li>
     <li class="has-subnav" routerLinkActive [routerLink]="['/user']" >
       <a>
-       <i class="bi"><img #image
-         alt="alt"
+       <i class="bi"><img
+         alt="alt" *ngIf="currentUser" [src]="imageUrl"
               class="social-card-user-image" /></i>
         <span class="nav-text" *ngIf="currentUser">
           Ciao {{currentUser.username}}!
@@ -57,9 +57,6 @@
       </a>
     </li>
   </ul>
-  <div *ngIf="currentUser">
-     <img [src]="imageUrl" alt="">
-  </div>
   <ul class="logout">
     <li>
       <a>

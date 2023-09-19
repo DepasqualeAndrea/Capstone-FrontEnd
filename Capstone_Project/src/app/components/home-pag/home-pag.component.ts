@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { AuthService } from 'src/app/auth/auth.service';
-import { Data } from 'src/app/auth/data.interface';
 import { CrudService } from 'src/app/service/crud.service';
 import { ModalService } from 'src/app/service/modal.service';
 
@@ -11,14 +10,12 @@ import { ModalService } from 'src/app/service/modal.service';
   styleUrls: ['./home-pag.component.scss']
 })
 export class HomePagComponent implements OnInit {
-  searchQuery!: string;
-  searchResults: any[] = [];
 
   modal = {
     showModal: false
   };
 
-  openModal(postId: number) {
+  openModal(_postId: number) {
     // Memorizza l'ID del film selezionato
     setTimeout(() => {
       //this.selectedMovieId = movieId;
@@ -32,50 +29,97 @@ export class HomePagComponent implements OnInit {
     // Resetta l'ID del film selezionato
   }
 
-
- /* onSearchInput(event: Event): void {
-    this.searchQuery = (event.target as HTMLInputElement).value;
-    if (this.searchQuery.trim() !== '') {
-      this.http.searchMovies(this.searchQuery).subscribe(
-        (searchResults) => {
-          this.searchResults = searchResults.results;
-          console.log(searchResults)
-        },
-        (error) => {
-          console.error(error);
-        }
-      );
-    } else {
-      // Resetta i risultati della ricerca quando l'input è vuoto
-      this.searchResults = [];
-    }
-  }*/
-
-  currentUser!: {
-    userId: String,
-    nome: String,
-    cognome: String,
-    username: String,
-    email: String,
-    role: String,
-    imageData:{} ,
-    post:{},
-    comment:{} ,
-    like: {},
-  }
+  searchQuery!: string;
+  searchResults: any[] = [];
+  /* onSearchInput(event: Event): void {
+     this.searchQuery = (event.target as HTMLInputElement).value;
+     if (this.searchQuery.trim() !== '') {
+       this.http.searchMovies(this.searchQuery).subscribe(
+         (searchResults) => {
+           this.searchResults = searchResults.results;
+           console.log(searchResults)
+         },
+         (error) => {
+           console.error(error);
+         }
+       );
+     } else {
+       // Resetta i risultati della ricerca quando l'input è vuoto
+       this.searchResults = [];
+     }
+   }*/
 
 
+  usersPosts!: {
+    nome: string,
+    cognome: string,
+    username: string,
+    email: string,
+    imagedata: {
+      imageData: ""
+    },
+    post:
+    [{
+      datacreazione: string,
+      description: string,
+      comment: {}[],
+      imagedata: {
+        imageData: string
+      }
+    }]
+  }[]
 
 
 
-  constructor(private http: CrudService, public modale: ModalService, private authService: AuthService) { }
 
+  usersImages: any[] = [];
+  allUserPosts: any[] = []
+  postImageUrl: any[] = [];
+  constructor(private http: CrudService, public modale: ModalService, private authService: AuthService, private sanitizer: DomSanitizer) { }
 
+  //@ViewChild('image', { static: false }) imageElement!: ElementRef;
 
   ngOnInit(): void {
+    this.http.getAllUsersPosts().subscribe(userInfo => {
+      this.usersPosts = userInfo.content
+      console.log(this.usersPosts)
 
+      /*const post = this.usersPosts[0].post
+      console.log(post);
+*/
+
+      for (let i = 0; i < this.usersPosts.length; i++) {
+        const userPost = this.usersPosts[i];
+        const imageBase64 = userPost.imagedata.imageData;
+        const imageBytes = this.authService.base64ToArrayBuffer(imageBase64);
+        const imageBlob = new Blob([imageBytes], { type: 'image/jpeg' });
+        const safeUrl = this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(imageBlob));
+        const imageUrl = safeUrl;
+        this.usersImages.push(imageUrl);
+
+        for (let j = 0; j < userPost.post.length; j++) {
+          const postImageBase64 = userPost.post[j].imagedata.imageData;
+          const postImageBytes = this.authService.base64ToArrayBuffer(postImageBase64);
+          const postImageBlob = new Blob([postImageBytes], { type: 'image/jpeg' });
+          const postSafeUrl = this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(postImageBlob));
+          const postImageUrl = postSafeUrl;
+          console.log(postImageUrl);
+          this.postImageUrl.push(postImageUrl);
+          console.log(this.usersPosts);
+        }
+      }
+    })
   }
 
+  base64ToArrayBuffer(base64: string) {
+    const binaryString = window.atob(base64);
+    const binaryLen = binaryString.length;
+    const bytes = new Uint8Array(binaryLen);
+    for (let i = 0; i < binaryLen; i++) {
+      bytes[i] = binaryString.charCodeAt(i);
+    }
+    return bytes;
+  }
 
 
 }

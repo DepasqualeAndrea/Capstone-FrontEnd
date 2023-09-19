@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
 
@@ -10,12 +11,11 @@ import { AuthService } from 'src/app/auth/auth.service';
 export class NavComponent implements OnInit {
 
   currentUser: any;
-  imageUrl!: string;
+  imageUrl!: any;
 
-  constructor(private router: Router, private authService: AuthService, private renderer: Renderer2) { }
+  constructor(private router: Router, private authService: AuthService, private renderer: Renderer2,  private sanitizer: DomSanitizer,) { }
 
 
-  @ViewChild('image', { static: false }) imageElement!: ElementRef;
 
 
   ngOnInit(): void {
@@ -25,27 +25,18 @@ export class NavComponent implements OnInit {
       console.log(this.currentUser)
 
       const imageBase64 = userInfo.imagedata.imageData;
-      const imageBytes = this.base64ToArrayBuffer(imageBase64);
+      const imageBytes = this.authService.base64ToArrayBuffer(imageBase64);
       const imageBlob = new Blob([imageBytes], { type: 'image/jpeg' });
-      const safeImageUrl = URL.createObjectURL(imageBlob);
-
-      this.imageUrl = safeImageUrl;
+      const SafeUrl = this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(imageBlob))
+      this.imageUrl = SafeUrl;
       console.log(this.imageUrl);
 
-      this.renderer.setAttribute(this.imageElement.nativeElement, 'src', this.imageUrl);
+
     });
 
   }
 
-  base64ToArrayBuffer(base64: string) {
-    const binaryString = window.atob(base64);
-    const binaryLen = binaryString.length;
-    const bytes = new Uint8Array(binaryLen);
-    for (let i = 0; i < binaryLen; i++) {
-      bytes[i] = binaryString.charCodeAt(i);
-    }
-    return bytes;
-  }
+
 
 
 

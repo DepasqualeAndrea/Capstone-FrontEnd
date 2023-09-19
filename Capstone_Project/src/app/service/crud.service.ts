@@ -10,12 +10,12 @@ import { Post } from '../interface/post.interface';
 })
 export class CrudService {
 
-  //private baseUrl = environment.urlSocial;
+  private baseUrl = environment.urlSocial;
 
-/*
+
   constructor(private http: HttpClient) { }
-  getAllUsers(): Observable<any>{
-    return this.http.get<any[]>(`${this.baseUrl}`);
+  getAllUsersPosts(): Observable<any>{
+    return this.http.get<any[]>(`${this.baseUrl}/utente/feeds`);
   }
 
   getPost(): Observable<any> {
@@ -58,5 +58,5 @@ export class CrudService {
 
   }
 
-*/
+
 }

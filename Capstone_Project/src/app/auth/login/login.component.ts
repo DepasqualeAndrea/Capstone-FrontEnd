@@ -28,7 +28,9 @@ email: string = '';
 
 constructor(private authService: AuthService, private router: Router, private http: HttpClient) { }
 
-ngOnInit(): void {}
+ngOnInit(): void {
+
+}
 
 changeToLogin() {
   this.register = false;
@@ -63,7 +65,6 @@ registra(form: NgForm): void {
     },
     (error) => {
       console.error('Errore durante la registrazione', error);
-      // Gestisci l'errore in base alle tue esigenze
       this.isLoading = false;
     }
   );
@@ -75,12 +76,12 @@ Accedi(): void {
       // Login effettuato con successo
       const token = this.authService.getToken();
       console.log('Token:', token); // Verifica il token nella console
-
+      alert('Login effettuato con successo ✅')
       this.router.navigate(['/home']);
-      console.log('Login effettuato:', response);
+     // console.log('Login effettuato:', response);
     },
     (error) => {
-
+      alert('⛔ Credenziali non valide Verifica che le credenziali di accesso sia corrette e riprova ad effettuale l\'accesso')
       console.error('Errore di login:', error);
     }
   );

@@ -32,28 +32,40 @@ export class AuthService {
     return !!this.token;
   }
 
+  getCurrentUserInfo(): Observable<any> {
+    return this.http.get<any[]>('http://localhost:3001/user/utente');
+  }
 
+  base64ToArrayBuffer(base64: string) {
+    const binaryString = window.atob(base64);
+    const binaryLen = binaryString.length;
+    const bytes = new Uint8Array(binaryLen);
+    for (let i = 0; i < binaryLen; i++) {
+      bytes[i] = binaryString.charCodeAt(i);
+    }
+    return bytes;
+  }
 
   login(email: string, password: string): Observable<any> {
     const credentials = { email, password };
     return this.http.post<any>('http://localhost:3001/auth/login', credentials)
       .pipe(map(response => {
-        console.log('Server Response:', response);
+       // console.log('Server Response:', response);
         if (response.token) {
-          console.log('Token:', response.token);
+          //console.log('Token:', response.token);
           localStorage.setItem('token', response.token);
         }
         return response;
       }));
   }
-/*
+
   restore() {
       // Utilizzato nel caso l'applicazione venga abbandonata senza effettuare il logout e poi venga riaperta con il token ancora valido
       const user = localStorage.getItem('user');
       if (!user) {
           return;
       }
-      const userData: AuthData = JSON.parse(user);
+      const userData: Data = JSON.parse(user);
       if (this.jwtHelper.isTokenExpired(userData.accessToken)) {
           // Consente di leggere il token, nello specifico data e ora di scadenza
           return;
@@ -61,7 +73,7 @@ export class AuthService {
       this.authSubj.next(userData); // Rientrando nell'applicazione, il BehaviourSubject è di nuovo null (vedi riga 16), di conseguenza riceve i valori presenti nel localStorage, letti dalla variabile user e parsati nella variabile useData
       this.autoLogout(userData);
   }
-*/
+
   signup(data: {
       image: File;
       nome: string;
@@ -81,8 +93,8 @@ export class AuthService {
           clearTimeout(this.timeoutLogout);
       }
   }
-/*
-  autoLogout(data: AuthData) {
+
+  autoLogout(data: Data) {
       const expirationDate = this.jwtHelper.getTokenExpirationDate(
           data.accessToken
       ) as Date;
@@ -92,12 +104,10 @@ export class AuthService {
           this.logout();
       }, expirationMilliseconds);
   }
-*/
 
 
-  getCurrentUserInfo(): Observable<any> {
-    return this.http.get<any[]>('http://localhost:3001/user/utente');
-  }
+
+
 
   private errors(err: any) {
       switch (err.error) {
