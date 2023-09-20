@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/co
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service';
+//import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 
 @Component({
   selector: 'app-nav',
@@ -13,9 +14,23 @@ export class NavComponent implements OnInit {
   currentUser: any;
   imageUrl!: any;
 
-  constructor(private router: Router, private authService: AuthService, private renderer: Renderer2,  private sanitizer: DomSanitizer,) { }
+  modal = {
+    showModal: false
+  };
+
+  openModal() {
+    setTimeout(() => {
+
+      this.modal.showModal = true;
+
+    }, 400)
+  }
+  closeModal() {
+    this.modal.showModal = false;
+  }
 
 
+  constructor(private router: Router, private authService: AuthService, private sanitizer: DomSanitizer) { }
 
 
   ngOnInit(): void {
@@ -29,16 +44,10 @@ export class NavComponent implements OnInit {
       const imageBlob = new Blob([imageBytes], { type: 'image/jpeg' });
       const SafeUrl = this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(imageBlob))
       this.imageUrl = SafeUrl;
-      console.log(this.imageUrl);
-
-
+      //console.log(this.imageUrl)
     });
 
   }
-
-
-
-
 
   logout() {
     localStorage.removeItem('token');

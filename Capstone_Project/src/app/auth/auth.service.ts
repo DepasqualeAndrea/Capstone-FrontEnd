@@ -2,20 +2,20 @@ import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from 'src/environments/environment';
 import { Data } from './data.interface';
-import { BehaviorSubject, Observable, catchError, map, tap, throwError } from 'rxjs';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { BehaviorSubject, Observable, map, throwError } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  jwtHelper = new JwtHelperService(); // Serve per leggere e validare il token
+  jwtHelper = new JwtHelperService();
   baseURL = environment.baseUrl;
-  private authSubj = new BehaviorSubject<null | Data>(null); // Serve per comunicare in tempo reale all'applicazione la presenza dell'utente autenticato
+  private authSubj = new BehaviorSubject<null | Data>(null);
   utente!: any;
   private token: string | null = null;
-  user$ = this.authSubj.asObservable(); // La variabile di tipo BehaviourSubject che trasmetterà la presenza o meno dell'utente
+  user$ = this.authSubj.asObservable();
   timeoutLogout: any;
 
   constructor(private http: HttpClient, private router: Router, ) {}
@@ -50,9 +50,7 @@ export class AuthService {
     const credentials = { email, password };
     return this.http.post<any>('http://localhost:3001/auth/login', credentials)
       .pipe(map(response => {
-       // console.log('Server Response:', response);
         if (response.token) {
-          //console.log('Token:', response.token);
           localStorage.setItem('token', response.token);
         }
         return response;
@@ -60,17 +58,16 @@ export class AuthService {
   }
 
   restore() {
-      // Utilizzato nel caso l'applicazione venga abbandonata senza effettuare il logout e poi venga riaperta con il token ancora valido
       const user = localStorage.getItem('user');
       if (!user) {
           return;
       }
       const userData: Data = JSON.parse(user);
       if (this.jwtHelper.isTokenExpired(userData.accessToken)) {
-          // Consente di leggere il token, nello specifico data e ora di scadenza
+
           return;
       }
-      this.authSubj.next(userData); // Rientrando nell'applicazione, il BehaviourSubject è di nuovo null (vedi riga 16), di conseguenza riceve i valori presenti nel localStorage, letti dalla variabile user e parsati nella variabile useData
+      this.authSubj.next(userData);
       this.autoLogout(userData);
   }
 

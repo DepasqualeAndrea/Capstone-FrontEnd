@@ -1,4 +1,4 @@
-<app-modal *ngIf="modal.showModal" (closeModalEvent)="closeModal()"></app-modal>
+<app-modal *ngIf="modal.showModal" (closeModalEvent)="closeModal()" [selectedPostId]="selectedPostId"></app-modal>
 <app-nav></app-nav>
 <!--[selectedMovieId]="selectedPostId"-->
 <!--(click)="openModal(post.id)"-->
@@ -9,36 +9,40 @@
     <form class="d-flex justify-content-center text-light" role="search">
       <input class="form-control me-2 w-25 inpt" type="search" placeholder="Search text-light" aria-label="Search">
     </form>
-    <div class="social-card mt-4" *ngFor="let usersPosts of usersPosts; let i = index">
+    <div *ngFor="let usersPosts of usersPosts; let i = index">
       <div *ngFor="let usersPost of usersPosts.post; let j = index">
-        <div class="social-card-header mb-5">
-          <img [src]="usersImages[i]" class="social-card-user-image" />
-          <a class="social-card-user-name" href="https://www.social.com/followmeto/"> {{ usersPosts.username }} </a>
-          <div class="social-card-time">58 min</div>
-        </div>
+        <div class="social-card mt-4" (click)="openModal(usersPost.postId, usersPost.userId)">
+          <div>
+            <div class="social-card-header mb-5">
+              <img [src]="usersImages[i]" class="social-card-user-image" />
+              <span class="social-card-user-name"> {{ usersPosts.username }} </span>
+            </div>
 
-        <div class="social-card-image">
-          <img [src]="postImageUrl[j]" />
-        </div>
+            <div class="social-card-image">
+              <img [src]="postImageUrl[j]" />
+            </div>
 
-        <div class="social-card-content pb-1">
-          <p class="likes text-light"><strong>18.068 Like</strong> </p>
-          <p class="text-light"><a class="social-card-content-user">Andrea De
-              Pasquale</a> {{usersPost.description}}<a class="hashtag"
-              href="https://www.social.com/explore/tags/visitkemi/">#visitkemi</a></p>
-          <p class="comments"> <strong>Vedi tutti i 48 Commenti</strong> </p>
-        </div>
+            <div class="social-card-content pb-1">
+              <p class="likes text-light"><strong>18.068 Like</strong> </p>
+              <p class="text-light"><a class="social-card-content-user">Andrea De
+                  Pasquale</a> {{usersPost.description}}<a class="hashtag"
+                  >#visitkemi</a></p>
+              <p class="comments"> <strong>Vedi tutti i 48 Commenti</strong> </p>
+            </div>
 
-        <div class="social-card-footer pt-0">
-          <a class="footer-action-icons"><i class="bi bi-heart"></i></a>
-          <input class="comments-input bg-transparent text-light" type="text-area"
-            placeholder="Scrivi qui il tuo commento" />
-          <a class="footer-action-icons"><i class="bi bi-three-dots"></i></a>
+            <div class="social-card-footer pt-0">
+              <a class="footer-action-icons"><i class="bi bi-heart"></i></a>
+              <input class="comments-input bg-transparent text-light" type="text-area"
+                placeholder="Scrivi qui il tuo commento" />
+              <a class="footer-action-icons"><i class="bi bi-three-dots"></i></a>
+            </div>
+          </div>
+
+
         </div>
       </div>
-
-
     </div>
+
 
   </div>
 

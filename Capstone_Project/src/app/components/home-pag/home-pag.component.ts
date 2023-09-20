@@ -15,20 +15,21 @@ export class HomePagComponent implements OnInit {
     showModal: false
   };
 
-  openModal(_postId: number) {
+  openModal(postId: number, userId: number): void {
     // Memorizza l'ID del film selezionato
     setTimeout(() => {
-      //this.selectedMovieId = movieId;
+      this.selectedPostId = postId;
+      this.selectedUserId = userId;
+      console.log(this.selectedPostId);
+      console.log(this.selectedUserId);
       this.modal.showModal = true;// Mostra il modale
-
     }, 400)
   }
   closeModal() {
-    this.modal.showModal = false; // Chiudi il modale impostando showModal su false
-    //this.selectedMovieId = null;
-    // Resetta l'ID del film selezionato
+    this.modal.showModal = false;
   }
-
+  selectedPostId!: number | any;
+  selectedUserId!: number | any;
   searchQuery!: string;
   searchResults: any[] = [];
   /* onSearchInput(event: Event): void {
@@ -60,6 +61,8 @@ export class HomePagComponent implements OnInit {
     },
     post:
     [{
+      postId: number,
+      userId: number;
       datacreazione: string,
       description: string,
       comment: {}[],
@@ -82,11 +85,8 @@ export class HomePagComponent implements OnInit {
   ngOnInit(): void {
     this.http.getAllUsersPosts().subscribe(userInfo => {
       this.usersPosts = userInfo.content
-      console.log(this.usersPosts)
+      //console.log(this.usersPosts)
 
-      /*const post = this.usersPosts[0].post
-      console.log(post);
-*/
 
       for (let i = 0; i < this.usersPosts.length; i++) {
         const userPost = this.usersPosts[i];
@@ -103,9 +103,9 @@ export class HomePagComponent implements OnInit {
           const postImageBlob = new Blob([postImageBytes], { type: 'image/jpeg' });
           const postSafeUrl = this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(postImageBlob));
           const postImageUrl = postSafeUrl;
-          console.log(postImageUrl);
+          //console.log(postImageUrl);
           this.postImageUrl.push(postImageUrl);
-          console.log(this.usersPosts);
+         // console.log(this.usersPosts);
         }
       }
     })

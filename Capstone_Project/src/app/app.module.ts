@@ -13,6 +13,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { TokenInterceptor } from './auth/token.interceptor';
 import { CrudService } from './service/crud.service';
 import { AuthService } from './auth/auth.service';
+import { PostModalComponent } from './components/post-modal/post-modal.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { AuthService } from './auth/auth.service';
     HomePagComponent,
     NavComponent,
     ModalComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    PostModalComponent
   ],
   imports: [
     BrowserModule,

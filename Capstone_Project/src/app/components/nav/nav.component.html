@@ -1,3 +1,4 @@
+<app-post-modal *ngIf="modal.showModal" (closeModalEvent)="closeModal()"></app-post-modal>
 <nav class="main-menu position-fixed">
   <ul>
     <li routerLinkActive [routerLink]="['/home']">
@@ -38,10 +39,10 @@
       </a>
     </li>
     <li>
-      <a>
+      <a (click)="openModal()">
         <i class="bi bi-plus-square"></i>
         <span class="nav-text">
-          Create
+          Crea
         </span>
       </a>
     </li>
@@ -51,7 +52,7 @@
          alt="alt" *ngIf="currentUser" [src]="imageUrl"
               class="social-card-user-image" /></i>
         <span class="nav-text" *ngIf="currentUser">
-          Ciao {{currentUser.username}}!
+          {{currentUser.username}}!
         </span>
 
       </a>
@@ -61,7 +62,7 @@
     <li>
       <a>
         <i class="bi bi-power"></i>
-        <span class="nav-text btn" (click)="logout()">
+        <span class="nav-text" (click)="logout()">
           Logout
         </span>
       </a>

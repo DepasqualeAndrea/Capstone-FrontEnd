@@ -19,11 +19,7 @@ onFileSelected(event: any) {
   this.selectedFile = event.target.files[0];
 }
 
-image!: File;
-username: string = '';
 password: string = '';
-name: string = '';
-surname: string = '';
 email: string = '';
 
 constructor(private authService: AuthService, private router: Router, private http: HttpClient) { }
@@ -73,12 +69,10 @@ registra(form: NgForm): void {
 Accedi(): void {
   this.authService.login(this.email, this.password).subscribe(
     (response) => {
-      // Login effettuato con successo
       const token = this.authService.getToken();
       console.log('Token:', token); // Verifica il token nella console
       alert('Login effettuato con successo ✅')
       this.router.navigate(['/home']);
-     // console.log('Login effettuato:', response);
     },
     (error) => {
       alert('⛔ Credenziali non valide Verifica che le credenziali di accesso sia corrette e riprova ad effettuale l\'accesso')

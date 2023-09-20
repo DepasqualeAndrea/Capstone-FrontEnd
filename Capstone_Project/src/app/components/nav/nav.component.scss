@@ -10,13 +10,13 @@
   text-align: center;
   vertical-align: middle;
   font-size: 25px;
-  color: rgb(23, 234, 209);
+  color: #17ead1;
 }
 
 
 .main-menu:hover,
 nav.main-menu.expanded {
-  width: 250px;
+  width: 12%;
   overflow: hidden;
 }
 
@@ -28,7 +28,7 @@ nav.main-menu.expanded {
   bottom: 0;
   height: 100%;
   left: 0;
-  width: 10%;
+  width: 12%;
   overflow: hidden;
   -webkit-transition: width .05s linear;
   transition: width .05s linear;

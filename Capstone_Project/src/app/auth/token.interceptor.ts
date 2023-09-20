@@ -5,7 +5,7 @@ import {
   HttpEvent,
   HttpInterceptor
 } from '@angular/common/http';
-import { Observable, switchMap, take } from 'rxjs';
+import { Observable } from 'rxjs';
 
 
 @Injectable()

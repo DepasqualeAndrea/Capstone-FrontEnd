@@ -23,6 +23,7 @@ export class ModalComponent implements OnInit {
     this.closeModalEvent.emit(); // Emetti l'evento di chiusura del modale
   }
   ngOnChanges(): void {
+
   }
 
 

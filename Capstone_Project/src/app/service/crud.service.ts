@@ -14,7 +14,7 @@ export class CrudService {
 
 
   constructor(private http: HttpClient) { }
-  getAllUsersPosts(): Observable<any>{
+  getAllUsersPosts(): Observable<any> {
     return this.http.get<any[]>(`${this.baseUrl}/utente/feeds`);
   }
 
@@ -26,9 +26,10 @@ export class CrudService {
     return this.http.put<Post[]>(`${this.baseUrl}/post/${postId}`, data);
   }
 
-  savePost(data: Post): Observable<any> {
-    return this.http.post<Post[]>(`${this.baseUrl}/post/save`, data);
+  savePost(formData: FormData): Observable<any> {
+    return this.http.post(`${this.baseUrl}/post/save`, formData);
   }
+
 
   deletePost(postId: String): Observable<any> {
     return this.http.delete<Post[]>(`${this.baseUrl}/post/${postId}`);
@@ -38,23 +39,23 @@ export class CrudService {
     return this.http.get<any[]>(`${this.baseUrl}/utente`);
   }
 
-  getUserInfo(userId: string): Observable<any>{
+  getUserInfo(userId: string): Observable<any> {
     return this.http.get<any[]>(`${this.baseUrl}/${userId}`);
   }
 
-  getPostComment(){
+  getPostComment() {
 
   }
 
-  getLikePosts(){
+  getLikePosts() {
 
   }
 
-  getCommentLike(){
+  getCommentLike() {
 
   }
 
-  getFollowers(){
+  getFollowers() {
 
   }
 
