@@ -1,5 +1,11 @@
 export interface Post {
-  description: string;
-  imageUrl: string;
-  localImage: File;
+  postId: number,
+  userId: number;
+  datacreazione: string,
+  description: string,
+  comment: {}[],
+  imagedata: {
+    imageData: string
+  }
+
 }

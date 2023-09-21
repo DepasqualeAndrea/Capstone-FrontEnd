@@ -1,6 +1,9 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { forkJoin, map } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
+import { Post } from 'src/app/interface/post.interface';
+import { User } from 'src/app/interface/user.interface';
 import { CrudService } from 'src/app/service/crud.service';
 import { ModalService } from 'src/app/service/modal.service';
 
@@ -51,75 +54,86 @@ export class HomePagComponent implements OnInit {
    }*/
 
 
-  usersPosts!: {
-    nome: string,
-    cognome: string,
-    username: string,
-    email: string,
-    imagedata: {
-      imageData: ""
-    },
-    post:
-    [{
-      postId: number,
-      userId: number;
-      datacreazione: string,
-      description: string,
-      comment: {}[],
-      imagedata: {
-        imageData: string
-      }
-    }]
-  }[]
 
 
 
 
-  usersImages: any[] = [];
-  allUserPosts: any[] = []
+
+  //homePosts: any[] | any;
+  //usersImages: any[] = [];
+  userPostInfo: any[] = [];;
   postImageUrl: any[] = [];
-  constructor(private http: CrudService, public modale: ModalService, private authService: AuthService, private sanitizer: DomSanitizer) { }
 
-  //@ViewChild('image', { static: false }) imageElement!: ElementRef;
+  homePosts: any[] = [];
+  usersImages: SafeUrl[] = [];
 
-  ngOnInit(): void {
+  constructor(private http: CrudService, private authService: AuthService, private sanitizer: DomSanitizer) { }
+
+
+ /* ngOnInit(): void {
     this.http.getAllUsersPosts().subscribe(userInfo => {
-      this.usersPosts = userInfo.content
-      //console.log(this.usersPosts)
+      this.homePosts = userInfo.content;
 
-
-      for (let i = 0; i < this.usersPosts.length; i++) {
-        const userPost = this.usersPosts[i];
-        const imageBase64 = userPost.imagedata.imageData;
+      for (let i = 0; i < this.homePosts.length; i++) {
+        const postImg = this.homePosts[i];
+        const imageBase64 = postImg.imagedata.imageData;
         const imageBytes = this.authService.base64ToArrayBuffer(imageBase64);
         const imageBlob = new Blob([imageBytes], { type: 'image/jpeg' });
         const safeUrl = this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(imageBlob));
         const imageUrl = safeUrl;
-        this.usersImages.push(imageUrl);
+        this.postImageUrl.push(imageUrl);
 
-        for (let j = 0; j < userPost.post.length; j++) {
-          const postImageBase64 = userPost.post[j].imagedata.imageData;
-          const postImageBytes = this.authService.base64ToArrayBuffer(postImageBase64);
-          const postImageBlob = new Blob([postImageBytes], { type: 'image/jpeg' });
-          const postSafeUrl = this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(postImageBlob));
-          const postImageUrl = postSafeUrl;
-          //console.log(postImageUrl);
-          this.postImageUrl.push(postImageUrl);
-         // console.log(this.usersPosts);
+
+        for (let j = 0; j < this.homePosts.length; j++) {
+          const userPost = this.homePosts[j];
+          const userId = userPost.userId; // Assumi che userId sia un UUID valido
+
+          // Ora puoi utilizzare userId per ottenere le informazioni dell'utente
+          this.http.getUserById(userId).subscribe(userPostInfo => {
+            this.userPostInfo = userPostInfo;
+            const imageBase64 = userPostInfo.imagedata.imageData;
+            const imageBytes = this.authService.base64ToArrayBuffer(imageBase64);
+            const imageBlob = new Blob([imageBytes], { type: 'image/jpeg' });
+            const safeUrl = this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(imageBlob));
+            const imageUrl = safeUrl;
+
+            // Aggiungi l'URL dell'immagine a postImageUrl
+            this.usersImages.push(imageUrl);
+          });
         }
       }
-    })
+    });
+  }*/
+
+  ngOnInit(): void {
+    this.http.getAllUsersPosts().subscribe(posts => {
+      this.homePosts = posts.content;
+      for(let j = 0; j < this.homePosts.length; j++) {
+      const postImageUrl = this.homePosts
+            const imageBase64 = postImageUrl[j].imagedata.imageData;
+            const imageBytes = this.authService.base64ToArrayBuffer(imageBase64);
+            const imageBlob = new Blob([imageBytes], { type: 'image/jpeg' });
+            const safeUrl = this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(imageBlob));
+            this.postImageUrl.push(safeUrl);
+      }
+      const userIds = this.homePosts.map(post => post.userId);
+      const userObservables = userIds.map(userId => this.http.getUserById(userId));
+
+      forkJoin(userObservables).subscribe(users => {
+        this.homePosts.forEach((post, index) => {
+          const user = users[index];
+          const imageBase64 = user.imagedata.imageData;
+          const imageBytes = this.authService.base64ToArrayBuffer(imageBase64);
+          const imageBlob = new Blob([imageBytes], { type: 'image/jpeg' });
+          const safeUrl = this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(imageBlob));
+          post.userImage = safeUrl;
+          post.username = user.username;
+        });
+      });
+
+    });
   }
 
-  base64ToArrayBuffer(base64: string) {
-    const binaryString = window.atob(base64);
-    const binaryLen = binaryString.length;
-    const bytes = new Uint8Array(binaryLen);
-    for (let i = 0; i < binaryLen; i++) {
-      bytes[i] = binaryString.charCodeAt(i);
-    }
-    return bytes;
-  }
 
 
 }

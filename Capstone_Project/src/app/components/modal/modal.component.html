@@ -1,79 +1,56 @@
 <div id="overlay" (click)="closeModal()"></div>
-<div id="container" class="d-flex">
-  <div class="image-modal">
-    <img
-      src="https://images.unsplash.com/photo-1682687982298-c7514a167088?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxMXx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=700&q=60"
-      alt="">
+<div id="container">
+  <div>
+
   </div>
-  <div class="d-flex flex-column align-items-center bi-align-middle w-75 p-0 mt-0">
-    <div class="social-card mt-2" style="border: hidden;">
-      <div class="social-card-header">
-        <img src="../../../assets/media/sfondo.jpg" class="social-card-user-image" />
-        <a class="social-card-user-name">Andrea De Pasquale</a>
-        <div class="social-card-time">
+  <div class="image-modal">
+    <img *ngIf="postInfo" [src]="imageData">
+  </div>
+  <div class="commenti-nav">
+    <div class="social-card" style="border: hidden;">
+      <div class="social-card-header d-flex justify-content-between align-items-center">
+        <div>
+          <img [src]="imageDataUser" class="social-card-user-image" />
+          <a class="social-card-user-name" *ngIf="userPostInfo">{{userPostInfo.username}}</a>
+        </div>
+        <div>
           <div class="dropdown">
-            <button class="btn three-dots" type="button" data-bs-toggle="dropdown"
-              aria-expanded="true">
-              <i class="bi bi-three-dots" ></i>
+            <button class="btn three-dots" type="button" data-bs-toggle="dropdown" aria-expanded="true">
+              <i class="bi bi-three-dots"></i>
             </button>
             <ul class="dropdown-menu">
               <li><button class="dropdown-item" type="button"><i class="bi bi-pencil-square me-2"></i>Edit</button></li>
               <li><button class="dropdown-item" type="button"><i class="bi bi-trash3 me-2"></i>Delete</button></li>
-
             </ul>
           </div>
         </div>
       </div>
     </div>
-
-
-    <div class="comment-list">
-      <div class="container-fluid row justify-content-center">
-        <div class="social-card mt-2">
-          <div class="social-card-header mb-2">
-            <img src="../../../assets/media/sfondo.jpg" class="social-card-user-image" />
-            <a class="social-card-user-name">Andrea De Pasquale</a>
-            <div class="social-card-time"><i class="bi bi-heart"></i></div>
-            <p class="text-light text-start container w-75">Descrizione del post che Lorem ipsum, dolor sit amet
-              consectetur adipisicing elit. Molestiae maxime architecto quos, non earum expedita aspernatur eligendi
-              cupiditate deserunt consequuntur facilis hic excepturi nulla facere itaque tenetur at ut illum! </p>
-          </div>
-        </div>
-      </div>
-      <!--qui vanno caricati i commenti dall'api-->
-      <div class="container-fluid row justify-content-center mt-3">
-        <div class="social-card mt-2">
-          <div class="social-card-header">
-            <img src="../../../assets/media/sfondo.jpg" class="social-card-user-image" />
-            <a class="social-card-user-name">Andrea De Pasquale</a>
-            <div class="social-card-time"><i class="bi bi-heart"></i></div>
-            <p class="text-light text-start container w-75">Descrizione del post </p>
-          </div>
-        </div>
-      </div>
-      <div class="container-fluid row justify-content-center mt-3">
-        <div class="social-card mt-2">
-          <div class="social-card-header">
-            <img src="../../../assets/media/sfondo.jpg" class="social-card-user-image" />
-            <a class="social-card-user-name">Andrea De Pasquale</a>
-            <div class="social-card-time"><i class="bi bi-heart"></i></div>
-            <p class="text-light text-start container w-75">Descrizione del post </p>
-          </div>
-        </div>
-      </div>
-      <div class="container-fluid row justify-content-center mt-3">
-        <div class="social-card mt-2">
-          <div class="social-card-header">
-            <img src="../../../assets/media/sfondo.jpg" class="social-card-user-image" />
-            <a class="social-card-user-name">Andrea De Pasquale</a>
-            <div class="social-card-time"><i class="bi bi-heart"></i></div>
-            <p class="text-light text-start container w-75">Descrizione del post </p>
-          </div>
-        </div>
-      </div>
-    </div>
+    <hr class="w-100">
     <div>
-      <h2>eventuali altre cose </h2>
+      <div class="comments-container">
+        <ul id="comments-list" class="comments-list p-0" *ngFor="let comment of postComment; let i = index" >
+          <li>
+            <div class="comment-main-level d-flex gap-4 my-2">
+              <div>
+                <img [src]="imageUsers" src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg"
+                  class="social-card-user-image" />
+              </div>
+                <div class="comment-box">
+                  <div class="comment-head">
+                    <h6 class="comment-name by-author"><a >{{comment.username}}</a></h6>
+                    <span>{{comment.dataCreazioneFormatted}}</span>
+                    <i class="bi bi-reply"></i>
+                    <i class="bi bi-heart"></i>
+                  </div>
+                  <div class="comment-content">
+                    {{comment.content}}
+                  </div>
+                </div>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>

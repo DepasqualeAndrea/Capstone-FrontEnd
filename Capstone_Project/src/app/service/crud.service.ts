@@ -1,9 +1,10 @@
 import { HttpClient, HttpClientModule, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { Data } from '../auth/data.interface';
-import { Observable, map } from 'rxjs';
+import { Observable} from 'rxjs';
 import { Post } from '../interface/post.interface';
+import { User } from '../interface/user.interface';
+
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +15,13 @@ export class CrudService {
 
 
   constructor(private http: HttpClient) { }
+
   getAllUsersPosts(): Observable<any> {
-    return this.http.get<any[]>(`${this.baseUrl}/utente/feeds`);
+    return this.http.get<any[]>(`${this.baseUrl}/post/home`);
   }
 
-  getPost(): Observable<any> {
-    return this.http.get<any[]>(`${this.baseUrl}/post`);
+  getPostById(postId: number): Observable<any> {
+    return this.http.get<Post[]>(`${this.baseUrl}/post/${postId}`);
   }
 
   modificaPost(data: Post, postId: String): Observable<any> {
@@ -39,8 +41,8 @@ export class CrudService {
     return this.http.get<any[]>(`${this.baseUrl}/utente`);
   }
 
-  getUserInfo(userId: string): Observable<any> {
-    return this.http.get<any[]>(`${this.baseUrl}/${userId}`);
+  getUserById(userId: number): Observable<any> {
+    return this.http.get<User[]>(`${this.baseUrl}/utente/${userId}`);
   }
 
   getPostComment() {

@@ -1,49 +1,40 @@
 <app-modal *ngIf="modal.showModal" (closeModalEvent)="closeModal()" [selectedPostId]="selectedPostId"></app-modal>
 <app-nav></app-nav>
-<!--[selectedMovieId]="selectedPostId"-->
-<!--(click)="openModal(post.id)"-->
-
-
 <div class="feed container-fluid d-flex flex-column justify-content-center mt-3">
   <div class="feed-home-page">
     <form class="d-flex justify-content-center text-light" role="search">
       <input class="form-control me-2 w-25 inpt" type="search" placeholder="Search text-light" aria-label="Search">
     </form>
-    <div *ngFor="let usersPosts of usersPosts; let i = index">
-      <div *ngFor="let usersPost of usersPosts.post; let j = index">
-        <div class="social-card mt-4" (click)="openModal(usersPost.postId, usersPost.userId)">
-          <div>
-            <div class="social-card-header mb-5">
-              <img [src]="usersImages[i]" class="social-card-user-image" />
-              <span class="social-card-user-name"> {{ usersPosts.username }} </span>
-            </div>
-
-            <div class="social-card-image">
-              <img [src]="postImageUrl[j]" />
-            </div>
-
-            <div class="social-card-content pb-1">
-              <p class="likes text-light"><strong>18.068 Like</strong> </p>
-              <p class="text-light"><a class="social-card-content-user">Andrea De
-                  Pasquale</a> {{usersPost.description}}<a class="hashtag"
-                  >#visitkemi</a></p>
-              <p class="comments"> <strong>Vedi tutti i 48 Commenti</strong> </p>
-            </div>
-
-            <div class="social-card-footer pt-0">
-              <a class="footer-action-icons"><i class="bi bi-heart"></i></a>
-              <input class="comments-input bg-transparent text-light" type="text-area"
-                placeholder="Scrivi qui il tuo commento" />
-              <a class="footer-action-icons"><i class="bi bi-three-dots"></i></a>
-            </div>
+    <div *ngFor="let post of homePosts; let i = index">
+      <div class="social-card mt-4">
+        <div>
+          <div class="social-card-header mb-5">
+            <div></div>
+            <!-- Mostra l'immagine dell'utente associato al post -->
+            <img [src]="post.userImage" class="social-card-user-image" />
+            <!-- Mostra lo username dell'utente associato al post -->
+            <span class="social-card-user-name">{{post.username}}</span>
           </div>
 
+          <div class="social-card-image">
+            <!-- Mostra l'immagine del post -->
+            <img [src]="postImageUrl[i]" (click)="openModal(post.postId, post.userId)" />
+          </div>
 
+          <div class="social-card-content pb-1">
+            <p class="likes text-light"><strong>18.068 Like</strong></p>
+            <!-- Mostra il nome dell'utente che ha creato il post -->
+            <p class="text-light"><a class="social-card-content-user">{{post.username}}</a> {{post.description}}<a class="hashtag">#visitkemi</a></p>
+            <p class="comments" (click)="openModal(post.postId, post.userId)"> <strong>Vedi tutti i 48 Commenti</strong> </p>
+          </div>
+
+          <div class="social-card-footer pt-0">
+            <a class="footer-action-icons"><i class="bi bi-heart"></i></a>
+            <input class="comments-input bg-transparent text-light" type="text-area" placeholder="Scrivi qui il tuo commento" />
+            <a class="footer-action-icons"><i class="bi bi-three-dots"></i></a>
+          </div>
         </div>
       </div>
     </div>
-
-
   </div>
-
 </div>

@@ -20,9 +20,7 @@ export class NavComponent implements OnInit {
 
   openModal() {
     setTimeout(() => {
-
       this.modal.showModal = true;
-
     }, 400)
   }
   closeModal() {

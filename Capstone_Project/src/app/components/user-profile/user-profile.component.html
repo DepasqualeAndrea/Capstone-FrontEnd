@@ -1,5 +1,5 @@
-<app-nav></app-nav>
 <app-modal *ngIf="modal.showModal" (closeModalEvent)="closeModal()"></app-modal>
+<app-nav></app-nav>
 <div class="contenuto-profile">
   <div class="profile-card mt-4 bg-transparent container d-flex flex-column gap-5" >
   <div class="profile-card-header mb-5 d-flex">
@@ -8,7 +8,7 @@
       class="profile-card-user-image" />
     <a class="profile-card-user-name" routerLinkActive [routerLink]="['/user']">Andrea De Pasquale</a>
   </div>
-  <div class="contenuti-profili text-light d-flex justify-content-center gap-5">
+  <div class="contenuti-profili text-light d-flex justify-content-center">
     <div class="follower text-center">
       <p class="neon-effect btn">Followers</p>
       <p>223</p>
