@@ -38,13 +38,6 @@ export class PostModalComponent implements OnInit {
     this.authService.getCurrentUserInfo().subscribe(userInfo => {
       this.currentUser = userInfo;
       console.log(this.currentUser)
-
-      const imageBase64 = userInfo.imagedata.imageData;
-      const imageBytes = this.authService.base64ToArrayBuffer(imageBase64);
-      const imageBlob = new Blob([imageBytes], { type: 'image/jpeg' });
-      const SafeUrl = this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(imageBlob))
-      this.imageUrl = SafeUrl;
-      console.log(this.imageUrl);
     });
   }
 
@@ -60,7 +53,6 @@ export class PostModalComponent implements OnInit {
         formData.append('image', this.selectedFile);
       }
       formData.append('description', form.value.description);
-      formData.append('imageLink', form.value.imageLink);
       this.http.savePost(formData).subscribe(
         (response: any) => {
           console.log('Post Pubblicato Correttamente', response);

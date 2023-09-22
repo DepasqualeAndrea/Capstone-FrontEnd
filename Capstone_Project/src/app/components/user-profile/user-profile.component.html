@@ -1,134 +1,34 @@
-<app-modal *ngIf="modal.showModal" (closeModalEvent)="closeModal()"></app-modal>
+<app-modal *ngIf="modal.showModal" (closeModalEvent)="closeModal()" [selectedPostId]="selectedPostId"></app-modal>
 <app-nav></app-nav>
-<div class="contenuto-profile">
-  <div class="profile-card mt-4 bg-transparent container d-flex flex-column gap-5" >
-  <div class="profile-card-header mb-5 d-flex">
-    <img
-      src="https://plus.unsplash.com/premium_photo-1682124752476-40db22034a58?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8YW5pbWV8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60"
-      class="profile-card-user-image" />
-    <a class="profile-card-user-name" routerLinkActive [routerLink]="['/user']">Andrea De Pasquale</a>
-  </div>
-  <div class="contenuti-profili text-light d-flex justify-content-center">
-    <div class="follower text-center">
-      <p class="neon-effect btn">Followers</p>
-      <p>223</p>
-      <hr>
-    </div>
-    <div class="post text-center">
-      <p class="neon-effect-post btn">Post</p>
-      <p>12</p>
-      <hr>
-    </div>
-    <div class="like text-center">
-      <p class="neon-effect-like btn">Like</p>
-      <p>500</p>
-      <hr>
+<div class="contenuto-profile container">
+  <div class="card mt-5">
+      <img *ngIf="currentUser" src="{{currentUser.profileImageUrl}}" alt="Impossibile caricare l'immagine" class="d-flex justify-content-center align-bottom">
+    <div class="bottom-section">
+      <span class="title">{{currentUser?.username}}</span>
+      <div class="row row1">
+        <div class="item">
+          <span class="big-text">2626</span>
+          <span class="regular-text">UI elements</span>
+        </div>
+        <div class="item">
+          <span class="big-text">100%</span>
+          <span class="regular-text">Free for use</span>
+        </div>
+        <div class="item">
+          <span class="big-text">38,631</span>
+          <span class="regular-text">Contributers</span>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-<form class="d-flex justify-content-center text-light" role="search">
-  <input class="form-control me-2 w-25 inpt" type="search" placeholder="Search text-light" aria-label="Search">
-</form>
 <div class="container-fluid d-flex flex-column justify-content-center mt-3">
   <hr class="container">
-  <div class="feed-home-page d-flex flex-wrap container">
-    <div class="social-card mt-4">
-      <div class="social-card-image">
-        <img
-          src="https://images.unsplash.com/photo-1693930270229-694fc4216a69?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMTh8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=600&q=60" />
-      </div>
+  <div class="feed-home-page d-flex flex-wrap container gap-3">
+    <div class="card-posts" *ngFor="let post of userPost; let i = index">
+      <img src="{{post.postImageUrl}}" alt="">
+      <div class="overlay" (click)="openModal(post.postId, post.userId)"></div>
+      <button class="card-btn"><i class="bi bi-heart"></i></button>
     </div>
-    <div class="social-card mt-4">
-      <div class="social-card-image">
-        <img
-          src="https://images.unsplash.com/photo-1693930270229-694fc4216a69?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMTh8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=600&q=60" />
-      </div>
-    </div>
-    <div class="social-card mt-4">
-      <div class="social-card-image">
-        <img
-          src="https://images.unsplash.com/photo-1693930270229-694fc4216a69?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMTh8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=600&q=60" />
-      </div>
-    </div>
-    <div class="social-card mt-4">
-      <div class="social-card-image">
-        <img
-          src="https://images.unsplash.com/photo-1693930270229-694fc4216a69?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMTh8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=600&q=60" />
-      </div>
-    </div>
-    <div class="social-card mt-4">
-      <div class="social-card-image">
-        <img
-          src="https://images.unsplash.com/photo-1693930270229-694fc4216a69?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMTh8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=600&q=60" />
-      </div>
-    </div>
-    <div class="social-card mt-4">
-      <div class="social-card-image">
-        <img
-          src="https://images.unsplash.com/photo-1693930270229-694fc4216a69?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMTh8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=600&q=60" />
-      </div>
-    </div>
-    <div class="social-card mt-4">
-      <div class="social-card-image">
-        <img
-          src="https://images.unsplash.com/photo-1693930270229-694fc4216a69?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMTh8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=600&q=60" />
-      </div>
-    </div>
-    <div class="social-card mt-4">
-      <div class="social-card-image">
-        <img
-          src="https://images.unsplash.com/photo-1693930270229-694fc4216a69?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMTh8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=600&q=60" />
-      </div>
-    </div>
-    <div class="social-card mt-4">
-      <div class="social-card-image">
-        <img
-          src="https://images.unsplash.com/photo-1693930270229-694fc4216a69?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMTh8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=600&q=60" />
-      </div>
-    </div>
-    <div class="social-card mt-4">
-      <div class="social-card-image">
-        <img
-          src="https://images.unsplash.com/photo-1693930270229-694fc4216a69?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMTh8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=600&q=60" />
-      </div>
-    </div>
-    <div class="social-card mt-4">
-      <div class="social-card-image">
-        <img
-          src="https://images.unsplash.com/photo-1693930270229-694fc4216a69?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMTh8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=600&q=60" />
-      </div>
-    </div>
-    <div class="social-card mt-4">
-      <div class="social-card-image">
-        <img
-          src="https://images.unsplash.com/photo-1693930270229-694fc4216a69?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMTh8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=600&q=60" />
-      </div>
-    </div>
-    <div class="social-card mt-4">
-      <div class="social-card-image">
-        <img
-          src="https://images.unsplash.com/photo-1693930270229-694fc4216a69?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMTh8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=600&q=60" />
-      </div>
-    </div>
-    <div class="social-card mt-4">
-      <div class="social-card-image">
-        <img
-          src="https://images.unsplash.com/photo-1693930270229-694fc4216a69?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMTh8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=600&q=60" />
-      </div>
-    </div>
-    <div class="social-card mt-4">
-      <div class="social-card-image">
-        <img
-          src="https://images.unsplash.com/photo-1693930270229-694fc4216a69?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMTh8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=600&q=60" />
-      </div>
-    </div>
-    <div class="social-card mt-4">
-      <div class="social-card-image">
-        <img
-          src="https://images.unsplash.com/photo-1693930270229-694fc4216a69?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwxMTh8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=600&q=60" />
-      </div>
-    </div>
-
   </div>
 </div>
 </div>

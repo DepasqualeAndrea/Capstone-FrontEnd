@@ -11,7 +11,6 @@ import { FormsModule } from '@angular/forms';
 import { ModalComponent } from './components/modal/modal.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { TokenInterceptor } from './auth/token.interceptor';
-import { CrudService } from './service/crud.service';
 import { AuthService } from './auth/auth.service';
 import { PostModalComponent } from './components/post-modal/post-modal.component';
 
@@ -33,11 +32,6 @@ import { PostModalComponent } from './components/post-modal/post-modal.component
   ],
   providers: [
     AuthService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
-      multi: true
-    },CrudService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

@@ -36,13 +36,6 @@ export class NavComponent implements OnInit {
     this.authService.getCurrentUserInfo().subscribe(userInfo => {
       this.currentUser = userInfo;
       console.log(this.currentUser)
-
-      const imageBase64 = userInfo.imagedata.imageData;
-      const imageBytes = this.authService.base64ToArrayBuffer(imageBase64);
-      const imageBlob = new Blob([imageBytes], { type: 'image/jpeg' });
-      const SafeUrl = this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(imageBlob))
-      this.imageUrl = SafeUrl;
-      //console.log(this.imageUrl)
     });
 
   }

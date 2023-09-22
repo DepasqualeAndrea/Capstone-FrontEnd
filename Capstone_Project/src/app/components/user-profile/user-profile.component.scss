@@ -1,75 +1,80 @@
-//text effect
-.btn {
-  padding: 0.4em;
-  font-size: 15px;
-  font-weight: bold;
-  border-radius: 15px;
-  color: #f6fff6;
-  letter-spacing: 0.3em;
-  text-shadow: -2px 2px 5px #fff;
-  background-color: transparent;
-  border: 2px solid #fff;
-  box-shadow: 0 0 0px 1px #fff,
-    0 0 10px 2px #fff,
-    inset 0 0 0px 1px #fff,
-    inset 0 0 10px 2px #fff;
-  transition: 100ms;
+.card {
+  width: 450px;
+  border-radius: 20px;
+  background: #1b233d;
+  padding: 5px;
+  overflow: hidden;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 20px 0px;
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  img{
+    border-radius: 10px;
+  }
 }
 
-.btn:hover {
-  box-shadow: 0 0 0px 1px #fff,
-    0 0 10px 2px #fff,
-    inset 0 0 0px 1px #fff,
-    inset 0 0 30px 2px #fff;
-  text-shadow: 0 0 10px #fff;
-  transform: translateY(-5px);
+.card:hover {
+  transform: scale(1.05);
 }
 
-.btn:active {
-  box-shadow: 0 0 0px 1px #fff,
-    0 0 25px 2px #fff,
-    inset 0 0 0px 1px #fff,
-    inset 0 0 30px 2px #fff;
-  transform: translateY(1px);
-}
-.contenuti-profili div>p{
-  font-size: 2em;
-}
-.contenuti-profili div>hr{
-  margin-top: 0;
-  border-bottom: 3px solid #fff;
-}
-//testo header follower post e
-//profile HEADER
-.profile-card{
-  background: #1b1e25;
-  border: 1px solid #fff;
-  border: hidden;
-  border-radius: 3px;
-  width: 100%;
-  margin: 0 auto;
+.card .top-section {
+  height: 150px;
+  border-radius:
+  10px;
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  //background: linear-gradient(45deg, rgb(4, 159, 187) 0%, rgb(80, 246, 255) 100%);
+  position: relative;
+
 }
 
-.profile-card-header{
-  padding: 40px;
-  height: 40px;
+
+
+
+.card .bottom-section {
+  margin-top: 10px;
+  padding: 10px 5px;
 }
 
-.profile-card-user-name {
-  margin-left: 20px;
-  font-weight: bold;
-  font-size: 3em;
-  width: 100%;
-  color: #fff;
+.card .bottom-section .title {
+  display: block;
+  font-size: 17px;
+  font-weight: bolder;
+  color: white;
+  text-align: center;
+  letter-spacing: 2px;
 }
 
-.profile-card-user-image {
-  border-radius: 50%;
-  border: 4px solid aquamarine;
-  width: 80px;
-  height: 80px;
-  vertical-align: middle;
+.card .bottom-section .row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
 }
+
+.card .bottom-section .row .item {
+  flex: 30%;
+  text-align: center;
+  padding: 5px;
+  color: rgba(170, 222, 243, 0.721);
+}
+
+.card .bottom-section .row .item .big-text {
+  font-size: 12px;
+  display: block;
+  color: white;
+  font-weight: 700;
+}
+
+.card .bottom-section .row .item .regular-text {
+  font-size: 9px;
+}
+
+.card .bottom-section .row .item:nth-child(2) {
+  border-left: 1px solid rgba(255, 255, 255, 0.126);
+  border-right: 1px solid rgba(255, 255, 255, 0.126);
+}
+
+
+
 //profile header follower post
 
 
@@ -175,4 +180,94 @@ div li {
 .bi-dot {
   color: green;
   font-size: 2.5em;
+}
+
+
+//cards
+
+.card-posts {
+  position: relative;
+  width: 300px;
+  height: 200px;
+  background-image: linear-gradient(-45deg, #29f8a2 0%, #0f4fff 100% );
+  border-radius: 10px;
+  border: hidden;
+  display: flex;
+  padding: 10px 30px;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.card-posts:hover .overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.card-posts .card-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-weight: 600;
+  padding: 10px 20px;
+  font-size: 16px;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff00;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 999;
+  border: none;
+  opacity: 0;
+  scale: 0;
+  transform-origin: 0 0;
+  box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.15);
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.card-posts:hover .card-btn {
+  opacity: 1;
+  scale: 1;
+}
+
+.card-posts .card-btn:hover {
+  box-shadow: 0 0 0px 5px rgba(0, 0, 0, 0.3);
+}
+
+.card-posts .card-btn:active {
+  scale: 0.95;
+}
+
+.overlay::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(-45deg, #2952f880 0%, #0fffff80 100% );
+  transition: transform 0.5s ease;
+}
+
+.card-posts:hover .overlay::after {
+  transform: translate(-50%, -50%) scale(2);
 }

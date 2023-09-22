@@ -1,3 +1,5 @@
+import { SafeUrl } from "@angular/platform-browser";
+
 export interface Post {
   postId: number,
   userId: number;
@@ -5,7 +7,7 @@ export interface Post {
   description: string,
   comment: {}[],
   imagedata: {
-    imageData: string
+    imageData: SafeUrl
   }
 
 }

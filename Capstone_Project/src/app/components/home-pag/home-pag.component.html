@@ -11,14 +11,14 @@
           <div class="social-card-header mb-5">
             <div></div>
             <!-- Mostra l'immagine dell'utente associato al post -->
-            <img [src]="post.userImage" class="social-card-user-image" />
+            <img src="{{post.userImage}}" loading="lazy" class="social-card-user-image" />
             <!-- Mostra lo username dell'utente associato al post -->
             <span class="social-card-user-name">{{post.username}}</span>
           </div>
 
           <div class="social-card-image">
             <!-- Mostra l'immagine del post -->
-            <img [src]="postImageUrl[i]" (click)="openModal(post.postId, post.userId)" />
+            <img src="{{post.postImageUrl}}" (click)="openModal(post.postId, post.userId)" />
           </div>
 
           <div class="social-card-content pb-1">

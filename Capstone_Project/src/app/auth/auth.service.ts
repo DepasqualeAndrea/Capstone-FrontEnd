@@ -51,9 +51,11 @@ export class AuthService {
     return this.http.post<any>('http://localhost:3001/auth/login', credentials)
       .pipe(map(response => {
         if (response.token) {
+          console.log(response.token);
           localStorage.setItem('token', response.token);
         }
         return response;
+
       }));
   }
 
