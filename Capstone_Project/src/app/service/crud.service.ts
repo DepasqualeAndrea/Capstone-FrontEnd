@@ -45,8 +45,8 @@ export class CrudService {
     return this.http.get<User[]>(`${this.baseUrl}/utente/${userId}`);
   }
 
-  getPostComment() {
-
+  getCommentsByPostId(postId: number): Observable<any> {
+    return this.http.get<Post[]>(`${this.baseUrl}/comment/getAllComments/${postId}`);
   }
 
   getLikePosts() {

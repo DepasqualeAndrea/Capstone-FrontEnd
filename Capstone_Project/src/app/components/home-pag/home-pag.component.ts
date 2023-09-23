@@ -53,13 +53,12 @@ export class HomePagComponent implements OnInit {
    }*/
 
 
-  userPostInfo: any[] = [];;
+  userPostInfo: any[] = [];
   postImageUrl: any[] = [];
-
   homePosts: any[] = [];
 
 
-  constructor(private http: CrudService, private authService: AuthService, private sanitizer: DomSanitizer) { }
+  constructor(private http: CrudService, private authService: AuthService) { }
 
 
   ngOnInit(): void {

@@ -28,14 +28,14 @@ export class NavComponent implements OnInit {
   }
 
 
-  constructor(private router: Router, private authService: AuthService, private sanitizer: DomSanitizer) { }
+  constructor(private router: Router, private authService: AuthService) { }
 
 
   ngOnInit(): void {
 
     this.authService.getCurrentUserInfo().subscribe(userInfo => {
       this.currentUser = userInfo;
-      console.log(this.currentUser)
+      //console.log(this.currentUser)
     });
 
   }

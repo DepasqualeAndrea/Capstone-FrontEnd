@@ -1,17 +1,17 @@
 <div id="overlay" (click)="closeModal()"></div>
 <div id="container">
   <div>
-
+    <!-- Aggiungi qui il contenuto che desideri -->
   </div>
   <div class="image-modal">
-    <img src="{{postInfo?.postImageUrl}}" loading="lazy">
+    <img [src]="postInfo?.postImageUrl" loading="lazy">
   </div>
   <div class="commenti-nav">
     <div class="social-card" style="border: hidden;">
       <div class="social-card-header d-flex justify-content-between align-items-center">
         <div>
-          <img src="{{postInfo?.postImageUrl}}" class="social-card-user-image" loading="lazy" />
-          <a class="social-card-user-name" >{{userPostInfo?.username}}</a>
+          <img [src]="postInfo?.userImage" class="social-card-user-image" loading="lazy" />
+          <a class="social-card-user-name">{{userPostInfo?.username}}</a>
         </div>
         <div>
           <div class="dropdown">
@@ -29,28 +29,27 @@
     <hr class="w-100">
     <div>
       <div class="comments-container">
-        <ul id="comments-list" class="comments-list p-0" *ngFor="let comment of postComment; let i = index" >
-          <li>
+        <ul id="comments-list" class="comments-list p-0">
+          <li *ngFor="let comment of postComments; let i = index">
             <div class="comment-main-level d-flex gap-4 my-2">
               <div>
-                <img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg"
-                  class="social-card-user-image" loading="lazy"/>
+                <img [src]="comment.user?.profileImageUrl" class="social-card-user-image" loading="lazy"/>
               </div>
-                <div class="comment-box">
-                  <div class="comment-head">
-                    <h6 class="comment-name by-author"><a >{{comment.username}}</a></h6>
-                    <span>{{comment.dataCreazioneFormatted}}</span>
-                    <i class="bi bi-reply"></i>
-                    <i class="bi bi-heart"></i>
-                  </div>
-                  <div class="comment-content">
-                    {{comment.content}}
-                  </div>
+              <div class="comment-box">
+                <div class="comment-head">
+                  <h6 class="comment-name by-author"><a>{{comment.user?.username}}</a></h6>
+                  <span>{{comment.formattedDate}}</span>
+                  <i class="bi bi-reply"></i>
+                  <i class="bi bi-heart"></i>
                 </div>
+                <div class="comment-content">
+                  {{comment.content}}
+                </div>
+              </div>
             </div>
           </li>
         </ul>
-        <div class="Message" >
+        <div class="Message">
           <input tabindex="i" pattern="\d+" placeholder="Comment.." class="MsgInput" type="text" name="content" id="content" style="height: 100%;">
           <svg xmlns="http://www.w3.org/2000/svg" version="1.0" width="30.000000pt" height="30.000000pt" viewBox="0 0 30.000000 30.000000" preserveAspectRatio="xMidYMid meet" class="SendSVG" style="width: 30px; height: 30px; background-size: 10px;">
             <g transform="translate(0.000000,30.000000) scale(0.100000,-0.100000)" fill="#ffffff70" stroke="none">
