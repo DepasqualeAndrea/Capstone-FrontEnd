@@ -10,7 +10,7 @@
     <div class="social-card" style="border: hidden;">
       <div class="social-card-header d-flex justify-content-between align-items-center">
         <div>
-          <img [src]="postInfo?.userImage" class="social-card-user-image" loading="lazy" />
+          <img src="{{userPostInfo?.profileImageUrl}}" class="social-card-user-image" loading="lazy" />
           <a class="social-card-user-name">{{userPostInfo?.username}}</a>
         </div>
         <div>
@@ -33,11 +33,11 @@
           <li *ngFor="let comment of postComments; let i = index">
             <div class="comment-main-level d-flex gap-4 my-2">
               <div>
-                <img [src]="comment.user?.profileImageUrl" class="social-card-user-image" loading="lazy"/>
+                <img [src]="userInfos[i]?.profileImageUrl" class="social-card-user-image" loading="lazy"/>
               </div>
               <div class="comment-box">
                 <div class="comment-head">
-                  <h6 class="comment-name by-author"><a>{{comment.user?.username}}</a></h6>
+                  <h6 class="comment-name by-author"><a>{{ userInfos[i]?.username }}</a></h6>
                   <span>{{comment.formattedDate}}</span>
                   <i class="bi bi-reply"></i>
                   <i class="bi bi-heart"></i>

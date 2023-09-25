@@ -19,7 +19,11 @@ export class ModalComponent implements OnInit {
   sub!: Subscription;
   postInfo: any;
   userPostInfo: any;
+
+
+  //gestione utenti commenti
   postComments: any[] = [];
+  userInfos: any[] = [];
   formattedDate: string = '';
 
 
@@ -34,49 +38,43 @@ export class ModalComponent implements OnInit {
   }
 
   ngOnChanges(): void {
-    if (this.selectedPostId) {
-      // Ottieni il post in base all'ID
-      this.http.getPostById(this.selectedPostId).subscribe((postInfo: any) => {
-        this.postInfo = postInfo;
-        console.log(postInfo)
-
-        // Ottieni l'utente associato al post
+    this.http.getPostById(this.selectedPostId).subscribe((postInfo: any) => {
+      this.postInfo = postInfo;
+      if (this.postInfo) {
         this.http.getUserById(this.postInfo.userId).subscribe((userPostInfo: any) => {
           this.userPostInfo = userPostInfo;
+        });
+      }
+    })
+    this.http.getCommentsByPostId(this.selectedPostId).subscribe(comments => {
+      this.postComments = comments;
+      const userIds = this.postComments.map(comment => comment.usercommentId);
+      const userObservables = userIds.map(usercommentId => this.http.getUserById(usercommentId));
 
-          // Ottieni i commenti associati al post
-          this.http.getCommentsByPostId(this.selectedPostId).subscribe((comments: any[]) => {
-            this.postComments = comments;
+      forkJoin(userObservables).subscribe(users => {
+        this.userInfos = users;
+        console.log(this.userInfos);
 
-            // Per ogni commento, ottieni l'utente associato
-            for (let i = 0; i < this.postComments.length; i++) {
-              const comment = this.postComments[i];
-
-              // Ottieni l'utente associato al commento
-              this.http.getUserById(comment.userId).subscribe((userCommentInfo: any) => {
-                comment.user = userCommentInfo;
-
-                // Formatta la data del commento
-                comment.formattedDate = format(new Date(comment.dataCreazione), 'dd MMM yyyy, HH:mm');
-
-                // Se ci sono risposte al commento, ottieni anche le informazioni sugli utenti per le risposte
-              /* if (comment.replies && comment.replies.length > 0) {
-                  // Per ogni risposta, ottieni l'utente associato
-                  for (let j = 0; j < comment.replies.length; j++) {
-                    const reply = comment.replies[j];
-
-                    // Ottieni l'utente associato alla risposta
-                    this.http.getUserById(reply.userId).subscribe((userReplyInfo: any) => {
-                      reply.user = userReplyInfo;
-                      console.log(reply);
-                    });
-                  }
-                }*/
-              });
-            }
-          });
+        // Formatta la data per ciascun commento
+        this.postComments.forEach((comment) => {
+          comment.formattedDate = format(new Date(comment.dataCreazione), 'dd MMM yyyy, HH:mm');
         });
       });
-    }
+    });
+
+
   }
+
+
+
+
+
+
+
 }
+
+
+
+
+
+
