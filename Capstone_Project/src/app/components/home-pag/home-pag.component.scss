@@ -1,5 +1,4 @@
 
-//time line post
 
 a {
   text-decoration: none;
@@ -115,3 +114,101 @@ hr {
   width: 100%;
 }
 
+.cards .outer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cards .card {
+  background: #ffffff;
+  width:280px;
+  padding: 0px;
+  opacity: 1;
+  pointer-events: none;
+  position: absolute;
+  top: 15%;
+  right: 2%;
+  border-radius: 100px 20px 20px 100px;
+  animation: animate 15s linear infinite;
+  animation-delay: calc(3s * var(--delay));
+}
+.outer:hover .card {
+  animation-play-state: paused;
+}
+.cards .card:last-child {
+  animation-delay: calc(-3s * var(--delay));
+}
+@keyframes animate {
+  0% {
+    opacity: 0;
+    transform: translateY(100%) scale(0.5);
+  }
+  5%,
+  20% {
+    opacity: 0.4;
+    transform: translateY(100%) scale(0.7);
+  }
+  25%,
+  40% {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0%) scale(1);
+  }
+  45%,
+  60% {
+    opacity: 0.4;
+    transform: translateY(-100%) scale(0.7);
+  }
+  65%,
+  100% {
+    opacity: 0;
+    transform: translateY(-100%) scale(0.5);
+  }
+}
+.cards .card .img {
+  height: 60px;
+  width: 60px;
+  position: absolute;
+  left: -5px;
+  background: #fff;
+  border-radius: 50%;
+  //padding: 5px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+.card .img img {
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.card .details {
+  margin-left: 60px;
+}
+.details p {
+  font-weight: 600;
+  font-size: 18px;
+  padding: 12px;
+  width: 100%;
+}
+.card a {
+  text-decoration: none;
+  padding: 7px 18px;
+  border-radius: 25px;
+  color: #fff;
+  background: linear-gradient(to bottom, #bea2e7 0%, #86b7e7 100%);
+  transition: all 0.3s ease;
+}
+.card a:hover {
+  transform: scale(0.94);
+}
+
+
+@media screen and (max-width: 1198px){
+  .cards .outer {
+    display: none !important;
+  }
+.container {
+  margin: 0 auto;
+}
+
+}

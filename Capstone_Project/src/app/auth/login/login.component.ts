@@ -70,7 +70,7 @@ Accedi(): void {
   this.authService.login(this.email, this.password).subscribe(
     (response) => {
       const token = this.authService.getToken();
-      console.log('Token:', token); // Verifica il token nella console
+      console.log('Token:', token);
       alert('Login effettuato con successo ✅')
       this.router.navigate(['/home']);
     },

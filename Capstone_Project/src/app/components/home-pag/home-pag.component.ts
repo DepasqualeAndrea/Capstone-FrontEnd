@@ -14,7 +14,7 @@ import { CrudService } from 'src/app/service/crud.service';
 export class HomePagComponent implements OnInit {
 
   modal = {
-    showModal: false
+    showModal: true
   };
 
   openModal(postId: number, userId: number): void {

@@ -33,17 +33,18 @@ export class UserProfileComponent implements OnInit {
 
 
   currentUser: any;
-  userPost: any[] = [];
+  userPosts: any[] = [];
 
-  constructor(private http: CrudService, private authService: AuthService, private sanitizer: DomSanitizer) { }
+  constructor(private http: CrudService, private authService: AuthService, ) { }
 
   ngOnInit(): void {
     this.authService.getCurrentUserInfo().subscribe(userInfo => {
       this.currentUser = userInfo;
+      console.log(this.currentUser)
 
-      for (let i = 0; i < this.currentUser.post.length; i++) {
-          const posts = this.currentUser.post[i]
-          this.userPost.push(posts)
+      for (let i = 0; i < this.currentUser.posts.length; i++) {
+          const posts = this.currentUser.posts[i]
+          this.userPosts.push(posts)
         };
 
     });

@@ -24,20 +24,25 @@ export class ModalComponent implements OnInit {
   //gestione utenti commenti
   postComments: any[] = [];
   userInfos: any[] = [];
+  reply: any[] = [];
   formattedDate: string = '';
+
 
 
   constructor(public modal: ModalService, private http: CrudService, private authService: AuthService, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
+
   }
+
+
 
   closeModal() {
     this.selectedPostId = null;
     this.closeModalEvent.emit();
   }
-
   ngOnChanges(): void {
+    // Ottieni informazioni sul post
     this.http.getPostById(this.selectedPostId).subscribe((postInfo: any) => {
       this.postInfo = postInfo;
       if (this.postInfo) {
@@ -45,7 +50,9 @@ export class ModalComponent implements OnInit {
           this.userPostInfo = userPostInfo;
         });
       }
-    })
+    });
+
+    // Ottieni i commenti principali
     this.http.getCommentsByPostId(this.selectedPostId).subscribe(comments => {
       this.postComments = comments;
       const userIds = this.postComments.map(comment => comment.usercommentId);
@@ -53,17 +60,34 @@ export class ModalComponent implements OnInit {
 
       forkJoin(userObservables).subscribe(users => {
         this.userInfos = users;
-        console.log(this.userInfos);
 
         // Formatta la data per ciascun commento
         this.postComments.forEach((comment) => {
           comment.formattedDate = format(new Date(comment.dataCreazione), 'dd MMM yyyy, HH:mm');
         });
+
+        // Ottieni le risposte per ciascun commento principale
+        this.postComments.forEach((comment) => {
+          this.http.getCommentsById(comment.commentId).subscribe((replies: any) => {
+            comment.replies = replies;
+            console.log(replies);
+
+            // Ottieni gli utenti associati alle risposte
+            const replyUserIds = replies.map((reply: { usercommentId: any; }) => reply.usercommentId);
+            const replyUserObservables = replyUserIds.map((replyUserId: number) => this.http.getUserById(replyUserId));
+
+            forkJoin(replyUserObservables).subscribe(replyUsers => {
+              comment.replyUsers = replyUsers;
+              console.log(replyUsers);
+            });
+          });
+        });
       });
     });
-
-
   }
+
+
+
 
 
 
