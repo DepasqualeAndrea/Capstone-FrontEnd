@@ -35,7 +35,6 @@ export class NavComponent implements OnInit {
 
     this.authService.getCurrentUserInfo().subscribe(userInfo => {
       this.currentUser = userInfo;
-      //console.log(this.currentUser)
     });
 
   }

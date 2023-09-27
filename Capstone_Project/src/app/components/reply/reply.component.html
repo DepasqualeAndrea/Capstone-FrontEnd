@@ -1,0 +1,21 @@
+<div id="overlay" (click)="closeOnlySecondModal()"></div>
+<div id="container">
+  <div >
+    <form #form="ngForm" class="text-light social-card-footer pt-0">
+      <div class="d-flex text-light justify-content-center align-items-baseline gap-3 mt-2">
+        <div>
+          <div class="inputbox">
+            <input required="required" type="string" name="content" id="content" ngModel>
+            <span>Commenta</span>
+            <i></i>
+          </div>
+        </div>
+        <div>
+          <i type="submit" class="bi bi-send-fill btn p-2" (click)="postComment()"></i>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <button (click)="closeOnlySecondModal()" class="btn btn-success">annulla</button>
+</div>

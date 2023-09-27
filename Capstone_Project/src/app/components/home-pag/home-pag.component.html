@@ -7,34 +7,49 @@
         <input class="form-control me-2 w-50 inpt" type="search" placeholder="Cerca utenti" aria-label="Search">
       </form>
       <div *ngFor="let post of homePosts; let i = index">
-        <div class="social-card mt-4">
+        <div class="social-card mt-4 ">
           <div>
             <div class="social-card-header mb-5">
               <!-- Mostra l'immagine dell'utente associato al post -->
               <img src="{{post.userImage}}" loading="lazy" class="social-card-user-image" />
-              <!-- Mostra lo username dell'utente associato al post -->
+              <div class="overlay"></div>
               <span class="social-card-user-name">{{post.username}}</span>
             </div>
 
             <div class="social-card-image">
-              <!-- Mostra l'immagine del post -->
-              <img src="{{post.postImageUrl}}" (click)="openModal(post.postId, post.userId)" />
+              <div class="feed-home-page d-flex flex-wrap container gap-3">
+                <div class="card-posts" >
+                  <img src="{{post.postImageUrl}}" alt="">
+                  <div class="overlay" (click)="openModal(post.postId, post.userId)"></div>
+                  <button class="card-btn"><i class="bi bi-heart" (click)="like(post.postId)"></i></button>
+                </div>
+              </div>
             </div>
 
             <div class="social-card-content pb-1">
               <p class="likes text-light"><strong>{{post.likeCount}} like</strong></p>
               <!-- Mostra il nome dell'utente che ha creato il post -->
               <p class="text-light"><a class="social-card-content-user">{{post.username}}</a> {{post.description}}<a
-                  class="hashtag">#visitkemi</a></p>
-              <p class="comments" (click)="openModal(post.postId, post.userId)"> <strong>Vedi tutti i
+                  class="hashtag"></a></p>
+              <p class="comments" (click)="openModal(post.postId, post.userId)"><strong>Vedi tutti i
                   {{post.comments.length}} Commenti</strong> </p>
             </div>
 
-            <div class="social-card-footer pt-0">
-              <a class="footer-action-icons"><i class="bi bi-heart"></i></a>
-              <input class="comments-input bg-transparent text-light" type="text-area"
-                placeholder="Scrivi qui il tuo commento" />
-              <a class="footer-action-icons"><i class="bi bi-three-dots"></i></a>
+            <div class="w-100">
+              <form #form="ngForm"  class="text-light social-card-footer pt-0">
+                <div class="d-flex text-light justify-content-center align-items-baseline gap-3 mt-2">
+                  <div>
+                    <div class="inputbox">
+                      <input required="required" type="string" name="content" id="content" ngModel >
+                      <span>Commenta</span>
+                      <i></i>
+                    </div>
+                  </div>
+                  <div>
+                    <i type="submit" class="bi bi-send-fill btn p-2" (click)="postComment(post.postId, form)"></i>
+                  </div>
+                </div>
+              </form>
             </div>
           </div>
         </div>

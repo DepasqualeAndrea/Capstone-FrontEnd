@@ -394,6 +394,63 @@ ul {
   -moz-border-radius: 3px;
   border-radius: 3px;
 }
+
+
+
+.modal {
+	opacity: 0;
+	pointer-events: none;
+	margin-top: 2em;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	width: 300px;
+	transform: translate(-50%,-50%);
+	background: #fff;
+	color: #333;
+	text-shadow: none;
+	padding: 2em;
+	text-align: left;
+	font-weight: normal;
+	border-radius: 5px;
+	box-shadow: 0 5px 15px;
+  text-transform: none;
+	transition: .2s all ease-out;
+}
+
+.launch-modal {
+	padding: .8em 1.5em .6em 1.5em;
+	display: inline-block;
+	background-image: linear-gradient(#aaff00, #689c00);
+	font-family: Arial;
+	text-transform: uppercase;
+	font-weight: bold;
+	line-height: 1em;
+	color: #fff;
+	border-radius: 3px;
+	text-align: center;
+	border: 1px solid #7ab700;
+	text-shadow: 0 -1px 0.5px rgba(0,0,0,.3);
+
+	&:hover {
+		cursor: pointer;
+		background-image: linear-gradient(#aaff00, #7ab701);
+	}
+
+	input {
+		height: 0;
+		width: 0;
+		opacity: 0;
+
+		&:checked {
+			+ .modal {
+				opacity: 1;
+				pointer-events: all;
+				margin-top: 0;
+			}
+		}
+	}
+}
 @media screen and (max-width: 1098px){
   .image_modal{
     display: none;

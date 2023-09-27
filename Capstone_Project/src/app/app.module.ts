@@ -13,6 +13,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { TokenInterceptor } from './auth/token.interceptor';
 import { AuthService } from './auth/auth.service';
 import { PostModalComponent } from './components/post-modal/post-modal.component';
+import { ReplyComponent } from './components/reply/reply.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { PostModalComponent } from './components/post-modal/post-modal.component
     NavComponent,
     ModalComponent,
     UserProfileComponent,
-    PostModalComponent
+    PostModalComponent,
+    ReplyComponent
   ],
   imports: [
     BrowserModule,
