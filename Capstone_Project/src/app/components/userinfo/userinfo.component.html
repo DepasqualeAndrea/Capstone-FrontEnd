@@ -5,19 +5,19 @@
     <div class="profile-card js-profile-card">
       <div class="d-flex justify-content-center align-items-center profile-card__container">
         <div class="profile-card__img">
-          <img [src]="currentUser?.profileImageUrl" alt="profile card">
+          <img [src]="User?.profileImageUrl" alt="profile card">
         </div>
         <div class="profile-card__cnt js-profile-cnt">
-          <div class="profile-card__name">{{currentUser?.nome}} {{currentUser?.cognome}}</div>
-          <div class="profile-card__name mb-3">@{{currentUser?.username}}</div>
+          <div class="profile-card__name">{{User?.nome}} {{User?.cognome}}</div>
+          <div class="profile-card__name mb-3">@{{User?.username}}</div>
           <div class="profile-card__txt"><strong>voglio vivere con il sole in fronte </strong></div>
           <div class="profile-card-loc">
             <span class="profile-card-loc__txt">
-              Istanbul, Turkey
+              ciao
             </span>
           </div>
-          <div class="profile-card-ctr">
-            <button class="profile-card__button button--orange">Impostazioni</button>
+          <div class="profile-card-ctr" >
+            <button class="profile-card__button button--orange"*ngIf="currentUser" (click)="toggleFollowing(User?.userId, currentUser?.userId)">Follow</button>
           </div>
         </div>
       </div>
@@ -45,10 +45,11 @@
 
 <div class="container-fluid d-flex flex-column justify-content-center">
   <div class="profile-card-inf">
-    <div class="profile-card-inf__item">
-      <div class="profile-card-inf__title">{{currentUser?.followers}}</div>
+    <div class="profile-card-inf__item" *ngFor="let userPost of userPosts; let i = index">
+      <div class="profile-card-inf__title">{{ userPosts[i].followers }}</div>
       <div class="profile-card-inf__txt">Followers</div>
     </div>
+
     <!--<div class="profile-card-inf__item">
       <div class="profile-card-inf__title">65</div>
       <div class="profile-card-inf__txt">Following</div>
@@ -78,21 +79,22 @@
 <div class="friends-menu position-fixed">
   <h2 class="text-center text-light mt-4">Friend list</h2>
   <hr>
-  <ul *ngFor="let user of followingsUsers;">
-    <li routerLinkActive [routerLink]="['/userInfo', user.userId]">
+  <ul>
+    <!--<li routerLinkActive [routerLink]="['/home']">
       <div class="social-card-header d-flex justify-content-between align-items-center mt-4 mb-5">
         <div>
           <img
-            src="{{user.profileImageUrl}}"
+            src="https://plus.unsplash.com/premium_photo-1675034823520-01a8784605ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyOXx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=60"
             class="social-card-user-image" />
         </div>
         <div class="nome-User">
-          <p class="social-card-user-name m-0 ms-2" routerLinkActive [routerLink]="['/user']">{{user.username}}</p>
+          <p class="social-card-user-name m-0 ms-2" routerLinkActive [routerLink]="['/user']">Andrea De Pasquale</p>
         </div>
         <div class="isActive">
           <i class="bi bi-dot"></i>
         </div>
       </div>
-    </li>
+    </li>-->
   </ul>
 </div>
+

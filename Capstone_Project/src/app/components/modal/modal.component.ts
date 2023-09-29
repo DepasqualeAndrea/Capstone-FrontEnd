@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { CrudService } from 'src/app/service/crud.service';
 import { ModalService } from 'src/app/service/modal.service';
 import { ReplyComponent } from '../reply/reply.component';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-modal',
@@ -16,6 +17,7 @@ export class ModalComponent implements OnInit {
   @Input() selectedPostId!: number | any;
   @Input() selectedUserId!: number | any;
   @Input() selectedCommentId!: number | any;
+  @Input() selectedReplyId!: number | any;
   @Output() closeModalEvent = new EventEmitter()
 
   modal = {
@@ -46,6 +48,7 @@ export class ModalComponent implements OnInit {
   userInfos: any[] = [];
   reply: any[] = [];
   formattedDate: string = '';
+  commentInput: string = '';
 
 
 
@@ -86,20 +89,8 @@ export class ModalComponent implements OnInit {
               reply.replyContent = '';
             });
 
-            replies.forEach((reply: any) => {
-              const user = this.userInfos.find(userInfo => userInfo.userId === reply.userReplyId);
-              if (user) {
-                this.sub! = this.http.getUserById(reply.userReplyId).subscribe(userRepliesInfo => {
-                  console.log(userRepliesInfo);
-                  reply.profileImageUrl = userRepliesInfo.profileImageUrl;
-                });
-              } else {
-
-                reply.profileImageUrl = 'Nessuna Immagine per l\nutente selezionato';
-              }
-            });
-
             comment.replies = replies;
+            console.log(replies);
 
             replies.forEach((reply: { formattedDate: string; dataCreazione: string | number | Date; }) => {
               reply.formattedDate = format(new Date(reply.dataCreazione), 'dd MMM yyyy, HH:mm');
@@ -112,19 +103,59 @@ export class ModalComponent implements OnInit {
     });
   }
 
-  inviaRisposta(reply: any): void {
+  postComment(selectedPostId: number, form: NgForm) {
+    const content = form.value.content;
+    const requestBody = { content: content };
+    this.http.commentPost(this.selectedPostId, requestBody).subscribe(
+      (responseMessage: string) => {
+       // alert('commento pubblicato 🤩')
+        window.location.reload();
+        console.log(responseMessage);
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
 
+  likeComment(commentId: number) {
+    this.http.likeComment(commentId).subscribe(
+      (responseMessage: string) => {
+        window.location.reload();
+        console.log(responseMessage);
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
+
+  likeReply(repliesId: number){
+    this.http.likeReply(repliesId).subscribe(
+      (responseMessage: string) => {
+        window.location.reload();
+        console.log(responseMessage );
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   }
 
 
 
 
-
-
-
-
-
 }
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -6,7 +6,5 @@ export interface User {
   cognome: string,
   username: string,
   email: string,
-  imagedata: {
-    imageData: ""
-  },
+  profileImageUrl: string
 }

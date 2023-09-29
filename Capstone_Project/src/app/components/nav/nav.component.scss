@@ -39,7 +39,13 @@
 
 .navbar li {
   margin: 10px 0;
+  cursor: pointer;
+ &:hover{
+  color:aqua;
+ }
+
 }
+
 
 .navbar i {
   font-size: 1.8em;

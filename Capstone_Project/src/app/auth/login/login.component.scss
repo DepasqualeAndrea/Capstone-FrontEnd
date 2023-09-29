@@ -195,3 +195,105 @@ background-color: transparent;
 color: #03e9f4;
 }
 // new login
+
+.loader {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  padding: 0;
+}
+
+.loader span {
+  position: absolute;
+  color: #fff;
+  transform: translate(0%, 0%);
+  font-size: 170px;
+  letter-spacing: 5px;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.loader span:nth-child(1) {
+  color: transparent;
+  -webkit-text-stroke: 0.3px #09f3ff;
+}
+
+.loader span:nth-child(2) {
+  color: rgb(128, 198, 255);
+  -webkit-text-stroke: 1px #05f3ff;
+  animation: uiverse723 3s ease-in-out infinite;
+}
+
+@keyframes uiverse723 {
+
+  0%,
+  100% {
+    clip-path: polygon(0% 45%, 15% 44%, 32% 50%,
+        54% 60%, 70% 61%, 84% 59%, 100% 52%, 100% 100%, 0% 100%);
+  }
+
+  50% {
+    clip-path: polygon(0% 60%, 16% 65%, 34% 66%,
+        51% 62%, 67% 50%, 84% 45%, 100% 46%, 100% 100%, 0% 100%);
+  }
+}
+
+.spinner {
+  background-image: linear-gradient(rgb(186, 66, 255) 35%,rgb(0, 225, 255));
+  max-width: 350px;
+  max-height: 350px;
+  animation: spinning82341 1.7s linear infinite;
+  text-align: center;
+  border-radius: 50%;
+  filter: blur(1px);
+  box-shadow: 0px -5px 20px 0px rgb(186, 66, 255), 0px 5px 20px 0px rgb(0, 225, 255);
+}
+
+.spinner1 {
+  background-color: rgb(36, 36, 36);
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  filter: blur(10px);
+}
+
+@keyframes spinning82341 {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.rec{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+.loadText{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+  color: #03e9f4;
+  font-size: 1em;
+  font-weight: 700;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  letter-spacing: 3px;
+}

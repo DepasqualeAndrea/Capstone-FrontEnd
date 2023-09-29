@@ -14,6 +14,7 @@ import { TokenInterceptor } from './auth/token.interceptor';
 import { AuthService } from './auth/auth.service';
 import { PostModalComponent } from './components/post-modal/post-modal.component';
 import { ReplyComponent } from './components/reply/reply.component';
+import { UserinfoComponent } from './components/userinfo/userinfo.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ReplyComponent } from './components/reply/reply.component';
     ModalComponent,
     UserProfileComponent,
     PostModalComponent,
-    ReplyComponent
+    ReplyComponent,
+    UserinfoComponent
   ],
   imports: [
     BrowserModule,

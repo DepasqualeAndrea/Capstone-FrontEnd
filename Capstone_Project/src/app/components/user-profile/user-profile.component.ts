@@ -31,7 +31,7 @@ export class UserProfileComponent implements OnInit {
     this.modal.showModal = false;
   }
 
-
+  followingsUsers: any[] = [];;
   currentUser: any;
   userPosts: any[] = [];
 
@@ -48,5 +48,10 @@ export class UserProfileComponent implements OnInit {
         };
 
     });
+
+    this.http.getFollowings().subscribe(followings => {
+      this.followingsUsers = followings
+      console.log(this.followingsUsers)
+    })
   }
 }

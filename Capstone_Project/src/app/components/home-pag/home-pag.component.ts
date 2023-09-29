@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Observable, forkJoin } from 'rxjs';
@@ -35,6 +35,16 @@ export class HomePagComponent implements OnInit {
   }
 
 
+  @HostListener('mouseenter')
+  onMouseEnter() {
+    this.isPaused = true;
+  }
+
+  @HostListener('mouseleave')
+  onMouseLeave() {
+    this.isPaused = false;
+  }
+
 
 
   searchQuery!: string;
@@ -56,14 +66,18 @@ export class HomePagComponent implements OnInit {
        this.searchResults = [];
      }
    }*/
-
+  isPaused = false;
   userPostInfo: any[] = [];
   postImageUrl: any[] = [];
   homePosts: any[] = [];
   content: string = '';
+  suggestedUsers: any[] = [];
+  userDelays: number[] = [0, 1, 2, 3, 4];
+  currentUser: any;
 
 
-  constructor(private http: CrudService) { }
+
+  constructor(private http: CrudService, private authService: AuthService) { }
 
 
   ngOnInit(): void {
@@ -81,11 +95,27 @@ export class HomePagComponent implements OnInit {
       });
 
     });
+    this.loadSuggestedUsers();
+    this.getCurrentUser();
+  }
+
+  getCurrentUser() {
+    this.authService.getCurrentUserInfo().subscribe(users => {
+      this.currentUser = users;
+    })
+  }
+
+  loadSuggestedUsers(): void {
+    this.http.getSuggestedUsers().subscribe(users => {
+      this.suggestedUsers = users;
+      console.log(this.suggestedUsers);
+    });
   }
 
   like(postId: number) {
     this.http.LikePost(postId).subscribe(
       (responseMessage: string) => {
+        window.location.reload()
         console.log(responseMessage);
 
       },
@@ -101,6 +131,7 @@ export class HomePagComponent implements OnInit {
     const requestBody = { content: content };
     this.http.commentPost(postId, requestBody).subscribe(
       (responseMessage: string) => {
+        alert('commento pubblicato 🤩')
         window.location.reload();
         console.log(responseMessage);
       },
@@ -110,6 +141,18 @@ export class HomePagComponent implements OnInit {
     );
   }
 
+  toggleFollowing(userId: number, userFollowedId: number){
+    this.http.toggleFollowing(userFollowedId, userId).subscribe(
+      (responseMessage: string) => {
+        window.location.reload();
+        console.log(responseMessage);
+      },
+      (error) => {
+        console.error(error);
+      }
+    )
+
+  }
 
 
 
