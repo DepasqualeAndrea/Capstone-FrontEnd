@@ -7,11 +7,11 @@
         <form class="d-flex justify-content-center text-light mb-4" role="search">
           <input class="form-control me-2 w-75 inpt" type="search" placeholder="Cerca utenti" aria-label="Search">
         </form>
-          <div class="slider" >
-            <div class="slide-track"  [ngClass]="{ 'paused': isPaused }">
-              <div class="slide d-flex justify-content-start align-items-start flex-column w-100"
-                *ngFor="let users of suggestedUsers;">
-                <div class="d-flex justify-content-center align-items-center flex-column gap-1" [ngClass]="{ 'paused': isPaused }">
+        <div class="slider">
+          <div class="slide-track">
+            <div class="slide d-flex justify-content-start align-items-start flex-column w-100"
+            *ngFor="let users of suggestedUsers;">
+                <div class="d-flex justify-content-center align-items-center flex-column gap-1">
                   <div [routerLink]="['/userInfo', users.userId]">
                     <img src="{{users.profileImageUrl}}" alt="" class="social-card-user-image-carousel" />
                   </div>
@@ -22,9 +22,9 @@
                     <a class="btn btn-success" (click)="toggleFollowing(users.userId, currentUser.userId)">Follow</a>
                   </div>
                 </div>
-              </div>
             </div>
           </div>
+        </div>
         <div *ngFor="let post of homePosts; let i = index">
           <div class="social-card mt-4 ">
             <div>
@@ -76,5 +76,4 @@
       </div>
     </div>
   </div>
-
 </div>
