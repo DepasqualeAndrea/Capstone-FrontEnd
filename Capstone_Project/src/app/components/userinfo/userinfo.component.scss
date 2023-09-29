@@ -31,7 +31,6 @@ hr {
 
 }
 
-//sezione friend list
 .friends-menu {
   background: #2e385288;
   border-left: 1px solid #e5e5e557;
@@ -81,7 +80,7 @@ div li {
   font-size: 2.5em;
 }
 
-//cards
+
 .card-posts {
   position: relative;
   width: 300px;
@@ -173,7 +172,7 @@ div li {
   margin: 10px auto;
 }
 
-//Profile Bio
+
 .icon {
   display: inline-block;
   width: 0.5em;
@@ -194,7 +193,6 @@ div li {
   @media screen and (max-width: 768px) {
     height: auto;
     min-height: 50vh;
-    //padding-top: 100px;
   }
 
 }
@@ -281,7 +279,6 @@ div li {
     margin-bottom: 15px;
 
     strong {
-      //color: #ff2846;
       font-weight: 700;
     }
 

@@ -82,15 +82,15 @@ export class LoginComponent implements OnInit {
         const token = this.authService.getToken();
         console.log('Token:', token)
         this.loginPage = false
-        this.login = true; // Nascondi il loader// Disattiva la barra di caricamento
+        this.login = true;
 
-        // Imposta un timeout per nascondere il loader dopo 4 secondi
+
         setTimeout(() => {
           this.router.navigate(['/home']);
-        }, 4000); // 4 secondi
+        }, 4000);
       },
       (error) => {
-        this.isLoading = false; // Disattiva la barra di caricamento in caso di errore
+        this.isLoading = false;
         alert('⛔ Credenziali non valide. Verifica che le credenziali di accesso siano corrette e riprova ad effettuare l\'accesso.');
         console.error('Errore di login:', error);
       }

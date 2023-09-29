@@ -108,7 +108,6 @@ export class ModalComponent implements OnInit {
     const requestBody = { content: content };
     this.http.commentPost(this.selectedPostId, requestBody).subscribe(
       (responseMessage: string) => {
-       // alert('commento pubblicato 🤩')
         window.location.reload();
         console.log(responseMessage);
       },

@@ -27,11 +27,11 @@ export class PostModalComponent implements OnInit {
 
 
   closeModal() {
-    this.selectedPostId = null; // Imposta l'ID del film selezionato su null per nascondere il modale
-    this.closeModalEvent.emit(); // Emetti l'evento di chiusura del modale
+    this.selectedPostId = null;
+    this.closeModalEvent.emit();
   }
 
-  constructor(public modal: ModalService, private http: CrudService, private authService: AuthService, private sanitizer: DomSanitizer) { }
+  constructor(public modal: ModalService, private http: CrudService, private authService: AuthService) { }
 
 
   ngOnInit(): void {

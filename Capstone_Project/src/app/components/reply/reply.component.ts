@@ -18,12 +18,12 @@ export class ReplyComponent implements OnInit {
   commentContent: string = '';
 
   stopClickPropagation(event: Event) {
-    event.stopPropagation(); // Impedisci la propagazione dell'evento di clic al wrapper del modal
+    event.stopPropagation();
   }
 
   closeOnlySecondModal(event: Event) {
-    event.stopPropagation(); // Impedisci la propagazione dell'evento di clic al wrapper del modal
-    this.closeSecondModalEvent.emit(); // Emetti l'evento solo per il secondo modale
+    event.stopPropagation();
+    this.closeSecondModalEvent.emit();
   }
 
   sub!: Subscription;
@@ -51,16 +51,10 @@ export class ReplyComponent implements OnInit {
     this.sub = this.http.getCommentById(this.selectedCommentId).subscribe(comment => {
       this.comment = comment;
       console.log(this.comment);
-
-      // Utilizza direttamente usercommentId senza map
       const userId = this.comment.usercommentId;
-
-      // Chiama getUserById con l'ID dell'utente
       this.http.getUserById(userId).subscribe(user => {
         this.userInfo = user;
         console.log(this.userInfo);
-
-        // Formatta la data del commento
         this.comment.formattedDate = format(new Date(this.comment.dataCreazione), 'dd MMM yyyy, HH:mm');
       });
     });

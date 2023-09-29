@@ -18,7 +18,10 @@
           </div>
           <div class="profile-card-ctr">
             <button class="profile-card__button button--orange">Impostazioni</button>
+            <button class="btn profile-card__button button--orange" type="button" data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Friend List</button>
           </div>
+
         </div>
       </div>
 
@@ -27,7 +30,6 @@
           <div class="profile-card-form__container">
             <textarea placeholder="Say something..."></textarea>
           </div>
-
           <div class="profile-card-form__bottom">
             <button class="profile-card__button button--blue js-message-close">
               Send
@@ -49,10 +51,6 @@
       <div class="profile-card-inf__title">{{currentUser?.followers}}</div>
       <div class="profile-card-inf__txt">Followers</div>
     </div>
-    <!--<div class="profile-card-inf__item">
-      <div class="profile-card-inf__title">65</div>
-      <div class="profile-card-inf__txt">Following</div>
-    </div>-->
     <div class="profile-card-inf__item">
       <div class="profile-card-inf__title"></div><!--{{userPosts[i].posts}}-->
       <div class="profile-card-inf__txt">Posts</div>
@@ -73,26 +71,29 @@
     </div>
   </div>
 </div>
-<!--area dedicata ai post dello user -->
-<!--area header ch prende i dati dell'utente-->
-<div class="friends-menu position-fixed">
-  <h2 class="text-center text-light mt-4">Friend list</h2>
-  <hr>
-  <ul *ngFor="let user of followingsUsers;">
-    <li routerLinkActive [routerLink]="['/userInfo', user.userId]">
-      <div class="social-card-header d-flex justify-content-between align-items-center mt-4 mb-5">
-        <div>
-          <img
-            src="{{user.profileImageUrl}}"
-            class="social-card-user-image" />
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title text-secondary" id="offcanvasRightLabel">Chi segui 👇</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    <hr>
+  </div>
+  <div class="offcanvas-body">
+    <ul *ngFor="let user of followingsUsers;">
+      <li routerLinkActive [routerLink]="['/userInfo', user.userId]">
+        <div class="social-card-header d-flex justify-content-between align-items-center mt-4 mb-5">
+          <div>
+            <img
+              src="{{user.profileImageUrl}}"
+              class="social-card-user-image" />
+          </div>
+          <div class="nome-User">
+            <p class="social-card-user-name m-0 ms-2" routerLinkActive [routerLink]="['/user']">{{user.username}}</p>
+          </div>
+          <div class="isActive">
+            <i class="bi bi-dot"></i>
+          </div>
         </div>
-        <div class="nome-User">
-          <p class="social-card-user-name m-0 ms-2" routerLinkActive [routerLink]="['/user']">{{user.username}}</p>
-        </div>
-        <div class="isActive">
-          <i class="bi bi-dot"></i>
-        </div>
-      </div>
-    </li>
-  </ul>
+      </li>
+    </ul>
+  </div>
 </div>

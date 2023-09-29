@@ -29,7 +29,6 @@
           <div class="social-card mt-4 ">
             <div>
               <div class="social-card-header mb-5" [routerLink]="['/userInfo', post.userId]">
-                <!-- Mostra l'immagine dell'utente associato al post -->
                 <img src="{{post.userImage}}" loading="lazy" class="social-card-user-image" />
                 <div class="overlay"></div>
                 <span class="social-card-user-name">{{post.username}}</span>
@@ -47,7 +46,6 @@
 
               <div class="social-card-content pb-1">
                 <p class="likes text-light"><strong>{{post.likeCount}} like</strong></p>
-                <!-- Mostra il nome dell'utente che ha creato il post -->
                 <p class="text-light"><a class="social-card-content-user">{{post.username}}</a> {{post.description}}<a
                     class="hashtag"></a></p>
                 <p class="comments" (click)="openModal(post.postId, post.userId)"><strong>Vedi tutti i
